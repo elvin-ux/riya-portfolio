@@ -1,0 +1,114 @@
+"use client";
+
+import Image from "next/image";
+import { motion } from "motion/react";
+
+
+export function HeroVisual() {
+  return (
+    <div className="relative flex h-[94vh] w-full items-end justify-center">
+      {/* SEAMLESS ATMOSPHERIC GRADIENTS (Behind Subject) */}
+
+      {/* 1. Main Luminous Halo (Centered behind head and shoulders) */}
+      <div
+        aria-hidden="true"
+        className="absolute top-[8%] left-[50%] -translate-x-1/2 h-[500px] w-[500px] rounded-full opacity-90 blur-[75px] pointer-events-none select-none z-0"
+        style={{
+          background: "radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(250,243,243,0.85) 30%, rgba(240,244,248,0.4) 65%, transparent 100%)"
+        }}
+      />
+
+      {/* 2. Blue-Lavender Diffusion (Centered behind lower body) */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-[12%] left-[50%] -translate-x-1/2 h-[600px] w-[700px] rounded-full opacity-85 blur-[95px] pointer-events-none select-none z-0"
+        style={{
+          background: "radial-gradient(circle, rgba(240,244,248,0.95) 0%, rgba(247,244,250,0.8) 35%, rgba(228,238,252,0.3) 70%, transparent 100%)"
+        }}
+      />
+
+      {/* 3. Soft Layered Ambient Blends (Composite of target color palette) */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-90 blur-[50px] pointer-events-none select-none z-0"
+        style={{
+          background: `
+            radial-gradient(circle at 50% 35%, rgba(255,255,255,0.95) 0%, rgba(245,247,255,0.75) 35%, rgba(240,244,248,0.35) 65%, transparent 100%),
+            radial-gradient(circle at 65% 55%, rgba(240,244,248,0.9) 0%, rgba(247,244,250,0.7) 45%, transparent 80%),
+            radial-gradient(circle at 35% 65%, rgba(250,243,243,0.95) 0%, rgba(252,251,250,0.5) 50%, transparent 85%)
+          `
+        }}
+      />
+
+      {/* 4. Faint bokeh highlights (extremely soft and slow drifting) */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute right-[25%] top-[25%] h-[140px] w-[140px] rounded-full bg-[#FFFFFF] opacity-35 blur-[35px] pointer-events-none select-none z-0"
+        animate={{ y: [0, -12, 0], x: [0, 6, 0] }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="absolute right-[8%] top-[40%] h-[180px] w-[180px] rounded-full bg-[#F4F6FB] opacity-30 blur-[45px] pointer-events-none select-none z-0"
+        animate={{ y: [0, 10, 0], x: [0, -8, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* CUTOUT INTEGRATION: Faint light wrap in front of the subject to embed it */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-[20%] right-[12%] z-25 w-[380px] h-[380px] rounded-full bg-[#FAF3F3] opacity-[0.08] blur-[70px] pointer-events-none select-none"
+      />
+
+      {/* SVG filter for the premium silhouette glazing effect (using React camelCase attributes) */}
+      <svg className="absolute h-0 w-0 pointer-events-none" aria-hidden="true">
+        <defs>
+          <filter id="luxury-glaze" x="-40%" y="-40%" width="180%" height="180%">
+            {/* Dilate source alpha for edge illumination */}
+            <feMorphology in="SourceAlpha" result="dilated-glow" operator="dilate" radius="16" />
+            <feGaussianBlur in="dilated-glow" result="blurred-glow" stdDeviation="30" />
+            <feFlood floodColor="#F4F6FB" floodOpacity={0.5} result="glow-color-1" />
+            <feComposite in="glow-color-1" in2="blurred-glow" operator="in" result="glaze-outer" />
+            
+            {/* Inner softer blush glow */}
+            <feMorphology in="SourceAlpha" result="dilated-glow-2" operator="dilate" radius="6" />
+            <feGaussianBlur in="dilated-glow-2" result="blurred-glow-2" stdDeviation="12" />
+            <feFlood floodColor="#FAF3F3" floodOpacity={0.75} result="glow-color-2" />
+            <feComposite in="glow-color-2" in2="blurred-glow-2" operator="in" result="glaze-inner" />
+
+            {/* Merge the glazing glow layers under Riya's cutout */}
+            <feMerge>
+              <feMergeNode in="glaze-outer" />
+              <feMergeNode in="glaze-inner" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+      </svg>
+
+      {/* Riya Cutout Image */}
+      <motion.div
+        initial={{ opacity: 0, y: 32 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-20 flex h-full w-full items-end justify-center"
+      >
+        <Image
+          src="/images/riya-francis-cutout.png"
+          alt="Riya Francis holding a microphone on stage"
+          width={1257}
+          height={2048}
+          priority
+          sizes="56vw"
+          style={{
+            filter: "url(#luxury-glaze)",
+            maskImage: "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 80%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 80%, transparent 100%)"
+          }}
+          className="relative z-20 h-[92vh] w-auto max-w-none object-contain drop-shadow-[0_20px_50px_rgba(126,105,111,0.03)] -translate-y-[100px]"
+        />
+      </motion.div>
+
+    </div>
+  );
+}

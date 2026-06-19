@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Allura, Manrope, Playfair_Display } from "next/font/google";
+import { Allura, Cormorant_Garamond, Manrope, Playfair_Display } from "next/font/google";
 
 import "./globals.css";
 
@@ -11,6 +11,12 @@ const manrope = Manrope({
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-serif",
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-cormorant",
 });
 
 const allura = Allura({
@@ -33,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${manrope.variable} ${playfair.variable} ${allura.variable} bg-[var(--background)] font-[family-name:var(--font-sans)] text-[var(--foreground)] antialiased`}
+        className={`${manrope.variable} ${playfair.variable} ${allura.variable} ${cormorant.variable} bg-[var(--background)] font-[family-name:var(--font-sans)] text-[var(--foreground)] antialiased`}
       >
         {children}
       </body>

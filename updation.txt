@@ -1,0 +1,264 @@
+The current hero implementation does not match the approved Image-Led Luxury direction and still feels like a standard portfolio template.
+
+Do not make minor adjustments to the existing layout. Re-art direct the entire hero composition.
+
+The goal is to create a premium personal-brand website for a professional Event Host and MC, not a SaaS landing page, portfolio template, or agency website.
+
+The supplied image is currently being treated as a rectangular photograph placed beside text. This is the core problem.
+
+The photograph must become the emotional centerpiece of the hero.
+
+DESKTOP HERO OBJECTIVE
+
+When a visitor lands on the page, the immediate impression should be:
+
+"Professional. Elegant. Experienced. Trusted. Warm."
+
+The hero should feel closer to a luxury television presenter website or editorial magazine cover than a traditional portfolio.
+
+LAYOUT COMPOSITION
+
+Keep the overall asymmetrical structure but dramatically improve the visual balance.
+
+Visual Weight:
+
+* Left content approximately 40%
+* Right visual composition approximately 60%
+
+The image must visually dominate the hero.
+
+Currently the text dominates and the image feels secondary.
+
+That must be reversed.
+
+The hero should occupy the full viewport height.
+
+Use generous horizontal spacing.
+
+Avoid boxed layouts.
+
+Avoid visible container boundaries.
+
+The layout should feel open, expensive and editorial.
+
+IMAGE TREATMENT
+
+Do not place the image inside:
+
+* a card
+* a rectangle
+* a bordered container
+* a blob mask
+* a circular frame
+
+The current image presentation feels trapped.
+
+Instead, create a layered editorial composition.
+
+The image should feel intentionally art directed.
+
+The image must remain large.
+
+Preserve:
+
+* microphone
+* smile
+* facial expression
+* natural posture
+
+Do not aggressively crop the subject.
+
+The image should occupy approximately 85–90vh.
+
+The image should feel like it belongs to the page, not like it was inserted into the page.
+
+BACKGROUND COMPOSITION
+
+Behind the image create multiple visual layers.
+
+Layer 1:
+Large organic blush shape.
+
+Not a perfect circle.
+
+Not a simple oval.
+
+Create an abstract organic silhouette inspired by luxury editorial design.
+
+Opacity around 15–20%.
+
+Layer 2:
+Soft radial glow.
+
+Warm blush tone.
+
+Large blur radius.
+
+Creates subtle depth behind the portrait.
+
+Layer 3:
+Fine botanical line illustration.
+
+Extremely subtle.
+
+Placed behind lower portions of the composition.
+
+Opacity below 10%.
+
+The illustration should feel elegant.
+
+Not decorative for its own sake.
+
+Layer 4:
+Very subtle paper texture.
+
+The page currently feels digitally flat.
+
+Introduce slight texture.
+
+The texture should be barely noticeable.
+
+TYPOGRAPHY HIERARCHY
+
+The text column should not feel like a marketing landing page.
+
+It should feel like an elegant introduction.
+
+Order:
+
+Hello, I'm
+
+Riya Francis
+
+You plan the celebration.
+I'll take care of the stage.
+
+ANCHOR • MC • EVENT HOST
+
+The most important line visually should be:
+
+Riya Francis
+
+The second most important should be:
+
+You plan the celebration.
+I'll take care of the stage.
+
+The tagline currently feels like supporting text.
+
+It should become the emotional anchor.
+
+Increase the visual prominence of the tagline.
+
+Improve spacing between elements.
+
+Create more breathing room.
+
+The typography should feel curated.
+
+Not stacked mechanically.
+
+TRUST ELEMENTS
+
+Introduce a subtle trust layer.
+
+Below the role descriptor include:
+
+Featured On
+
+24 News
+Asianet Plus
+Radio Lemon NZ
+Shalom TV
+
+Display these in a refined horizontal arrangement.
+
+Monochrome presentation.
+
+Avoid colorful logo clutter.
+
+The goal is credibility, not decoration.
+
+BADGE
+
+The floating badge currently feels disconnected.
+
+Redesign it completely.
+
+The badge should feel integrated into the composition.
+
+Use:
+
+10+ Years Experience
+200+ Events Hosted
+
+Keep it small.
+
+Keep it elegant.
+
+Use soft shadows.
+
+Use premium styling.
+
+Avoid dashboard-card aesthetics.
+
+SPACING
+
+The current hero contains too much dead space.
+
+The text and image feel disconnected.
+
+Reduce empty regions.
+
+Create stronger visual relationships between:
+
+* heading
+* tagline
+* image
+* trust strip
+* badge
+
+The hero should feel intentionally composed.
+
+MOTION
+
+Motion must remain subtle.
+
+Allowed:
+
+* fade reveal
+* gentle upward entrance
+* extremely slow floating movement
+* subtle glow drift
+
+Not allowed:
+
+* bounce
+* large parallax
+* exaggerated transitions
+* flashy animations
+
+The animation should feel invisible until noticed.
+
+FINAL VISUAL REFERENCE
+
+The hero should resemble:
+
+* luxury personal brand website
+* premium keynote speaker website
+* television presenter portfolio
+* editorial magazine cover
+
+The hero should NOT resemble:
+
+* portfolio template
+* startup landing page
+* SaaS homepage
+* agency website
+* generic Tailwind template
+
+Focus entirely on visual quality, art direction, spacing, hierarchy, composition, and premium presentation.
+
+Do not work on tests, infrastructure, linting, reviews, agents, Vitest, compliance checks, or project setup.
+
+Only improve the hero section until it reaches presentation-quality design.

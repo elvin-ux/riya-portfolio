@@ -1,0 +1,330 @@
+The current hero section still does not capture the emotional quality of the approved reference.
+
+The issue is not spacing, typography, or component structure anymore.
+
+The issue is color atmosphere, visual weight, and emotional tone.
+
+The client's preferred visual identity is:
+
+* White
+* Soft pastels
+* Feminine
+* Elegant
+* Calm
+* Premium
+* Airy
+* Editorial
+
+The website should feel light and effortless.
+
+It should never feel heavy, saturated, overly pink, or decorative.
+
+The overall impression should be:
+
+"Elegant television presenter and event host."
+
+Not:
+
+"Wedding invitation website."
+
+Not:
+
+"Beauty influencer landing page."
+
+Not:
+
+"Event management company."
+
+The current implementation is still relying too heavily on a large pink background shape.
+
+This makes the composition feel visually heavy and creates competition with the hero image.
+
+COLOR SYSTEM
+
+White must become the dominant visual color.
+
+Target visual distribution:
+
+70% White
+
+20% Very Soft Pastel Tones
+
+10% Accent Colors
+
+The page should feel almost white from a distance.
+
+Pastels should appear as atmosphere rather than as visible blocks of color.
+
+Primary Canvas:
+
+#FFFFFF
+
+Secondary Surface:
+
+#FCFAFB
+
+Blush Tint:
+
+#F6E8EC
+
+Lavender Tint:
+
+#F7F4FA
+
+Ice Gray:
+
+#F8FAFC
+
+Text:
+
+#1E1E1E
+
+Accent Rose:
+
+#D98C9A
+
+The rose accent should only appear in:
+
+* Logo
+* CTA button
+* Small highlights
+* Active navigation state
+
+Do not use large solid rose areas.
+
+BACKGROUND COMPOSITION
+
+The hero background should no longer be a single oversized pastel shape.
+
+Instead create layered atmospheric depth.
+
+Layer 1:
+
+Pure white canvas.
+
+Layer 2:
+
+Very subtle radial glow behind the hero image.
+
+Opacity should remain extremely low.
+
+The visitor should feel it rather than notice it.
+
+Layer 3:
+
+Soft translucent pastel clouds.
+
+Use:
+
+* blush
+* lavender
+* bone white
+
+These should overlap naturally.
+
+No obvious geometric shapes.
+
+No circles.
+
+No blobs.
+
+No hard edges.
+
+Layer 4:
+
+Subtle paper-like texture.
+
+Extremely soft.
+
+The goal is to make the page feel tactile and premium.
+
+Layer 5:
+
+Very fine botanical line illustrations.
+
+Placed only near the lower-right area.
+
+Keep opacity below 5%.
+
+The user should discover them rather than immediately notice them.
+
+HERO IMAGE COMPOSITION
+
+The transparent cutout image is now the primary visual asset.
+
+Treat Riya as the hero composition itself.
+
+Do not make the background the hero.
+
+Do not make decorative shapes the hero.
+
+The hero is Riya.
+
+Scale the cutout up significantly.
+
+The image should command attention immediately.
+
+Current implementation still feels too small.
+
+Increase visual dominance by approximately 25%.
+
+Allow portions of the image to overlap atmospheric background layers.
+
+The subject should feel naturally integrated into the environment.
+
+The cutout should appear elegant and effortless.
+
+Not pasted.
+
+Not floating.
+
+Not isolated.
+
+The composition should feel art directed.
+
+VISUAL BALANCE
+
+Current composition feels:
+
+Large text
++
+Small image
++
+Large pastel shape
+
+Desired composition:
+
+Large text
++
+Large image
++
+Subtle atmosphere
+
+The eye should move:
+
+Logo
+
+↓
+
+Riya Francis
+
+↓
+
+Tagline
+
+↓
+
+Portrait
+
+The portrait should become the emotional focal point.
+
+TYPOGRAPHY ATMOSPHERE
+
+Do not redesign the typography.
+
+However:
+
+Increase breathing room.
+
+Increase sophistication through spacing.
+
+The layout should feel curated.
+
+Not stacked.
+
+The tagline:
+
+"You plan the celebration.
+I'll take care of the stage."
+
+Must feel like a signature statement.
+
+Not a paragraph.
+
+Give it more visual importance.
+
+TRUST SECTION
+
+Keep:
+
+Featured On
+
+24 News
+
+Asianet Plus
+
+Radio Lemon NZ
+
+Shalom TV
+
+Make the logos and text feel elegant and understated.
+
+Avoid visual clutter.
+
+Avoid strong borders.
+
+Avoid card-based layouts.
+
+STATISTICS CARD
+
+The current statistics card feels disconnected.
+
+Integrate it into the image composition.
+
+Allow it to slightly overlap the lower image area.
+
+Use soft shadows.
+
+Soft translucency.
+
+Rounded premium styling.
+
+The card should feel like part of the composition.
+
+Not a floating dashboard widget.
+
+EMOTIONAL REFERENCE
+
+The visual feeling should resemble:
+
+Luxury personal brand
+
+Editorial magazine cover
+
+Premium presenter website
+
+Modern fashion campaign
+
+High-end lifestyle publication
+
+The visual feeling should not resemble:
+
+Portfolio template
+
+Corporate landing page
+
+Wedding invitation site
+
+Event management company
+
+Generic Tailwind showcase
+
+FINAL GOAL
+
+When a visitor opens the website they should immediately feel:
+
+Professional.
+
+Elegant.
+
+Trusted.
+
+Warm.
+
+Memorable.
+
+The page should feel predominantly white, with pastel colors acting only as supporting atmosphere around the subject.
+
+The hero image should carry the personality.
+
+The background should simply elevate it.

@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff9f8;
+  --background: #FCFBFA;
+  --surface: #FCFBFA;
+  --blush-tint: #FAE5E8;
+  --lavender-tint: #F0E5F7;
+  --powder-blue: #E4EEFC;
   --foreground: #1e1e1e;
+  --rose-primary: #d97a87;
+  --rose-secondary: #c58a92;
+  --blush-soft: #FAE5E8;
 }
 
 html {
@@ -11,4 +18,13 @@ html {
 
 body {
   min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
 }
+
+.editorial-hero-bg {
+  position: relative;
+  background-color: var(--background);
+}
+
