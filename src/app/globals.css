@@ -16,6 +16,12 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 96px;
+  }
+}
+
 body {
   min-height: 100vh;
   background-color: var(--background);

@@ -2,27 +2,35 @@
 
 import Image from "next/image";
 
-const row1Brands = [
+const featuredBrands = [
+  { src: "/brands/starbucks.jpeg", alt: "Starbucks" },
+  { src: "/brands/dilmah.jpeg", alt: "Dilmah" },
+  { src: "/brands/sebamed.jpeg", alt: "Sebamed" },
+];
+
+const otherBrands = [
   { src: "/brands/atmosphere.jpeg", alt: "Atmosphere" },
   { src: "/brands/clickspice.jpeg", alt: "Click Spice" },
-  { src: "/brands/dilmah.jpeg", alt: "Dilmah" },
   { src: "/brands/diya.jpeg", alt: "Diya" },
   { src: "/brands/fourthree.jpeg", alt: "Four Three" },
   { src: "/brands/hanabotanicals.jpeg", alt: "Hana Botanicals" },
   { src: "/brands/naturkidz.jpeg", alt: "NaturKidz" },
-];
-
-const row2Brands = [
   { src: "/brands/peternatural.jpeg", alt: "Peter Natural" },
-  { src: "/brands/sebamed.jpeg", alt: "Sebamed" },
   { src: "/brands/solidtooth.jpeg", alt: "Solid Tooth" },
-  { src: "/brands/starbucks.jpeg", alt: "Starbucks" },
   { src: "/brands/sugarhigh.jpeg", alt: "Sugar High" },
   { src: "/brands/whiskedcreations.jpeg", alt: "Whisked Creations" },
   { src: "/brands/whatsapp-brand.jpeg", alt: "Event Brand" },
+  { src: "/brands/careerflow.png", alt: "Career Flow" },
 ];
 
-const allBrands = [...row1Brands, ...row2Brands];
+const row1Brands = [
+  ...featuredBrands,
+  ...otherBrands.slice(0, 4),
+];
+
+const row2Brands = [
+  ...otherBrands.slice(4),
+];
 
 const decorativeAccents = [
   { type: "sparkle", top: "15%", left: "8%", size: 14 },
@@ -35,7 +43,7 @@ export function BrandsSection() {
   return (
     <section
       id="brands"
-      className="relative w-full py-10 overflow-hidden z-10 flex flex-col items-center border-t border-[#D98C9A]/5"
+      className="relative w-full pt-20 pb-12 overflow-hidden z-10 flex flex-col items-center border-t border-[#D98C9A]/5"
       style={{
         background: "linear-gradient(135deg, rgba(253,248,249,0.85) 0%, rgba(247,246,251,0.85) 45%, rgba(244,248,2fd,0.85) 100%)",
       }}
@@ -192,31 +200,68 @@ export function BrandsSection() {
             </div>
           </div>
  
-          {/* MOBILE VIEW: Single Row Marquee (Larger Logos, slower speed) */}
-          <div className="flex md:hidden w-full overflow-x-auto scrollbar-none">
-            <div className="flex w-max gap-3.5 marquee-scroll-mobile px-4">
-              {[...allBrands, ...allBrands].map((brand, idx) => (
-                <div
-                  key={`mob-${idx}`}
-                  style={{
-                    background: "rgba(255, 255, 255, 0.7)",
-                    backdropFilter: "blur(12px)",
-                    WebkitBackdropFilter: "blur(12px)",
-                    borderColor: "rgba(255, 255, 255, 0.6)",
-                  }}
-                  className="flex items-center justify-center w-[180px] h-[80px] rounded-[20px] px-5 py-3 border shadow-[0_4px_15px_rgba(80,80,120,0.02)] transition-all duration-300 hover:translate-y-[-3px] active:scale-[0.98] cursor-pointer"
-                >
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={brand.src}
-                      alt={brand.alt}
-                      fill
-                      sizes="180px"
-                      className="object-contain mix-blend-mode-multiply opacity-90"
-                    />
+          {/* MOBILE VIEW: Static stacked grid (no marquee, prioritized branding) */}
+          <div className="flex md:hidden flex-col gap-6 w-full px-6 mt-4">
+            {/* Featured Collaborations */}
+            <div className="flex flex-col gap-3">
+              <span className="block text-center font-sans text-[10px] font-semibold tracking-[0.25em] uppercase text-[#D98C9A]">
+                ✦ Featured Collaborations ✦
+              </span>
+              <div className="grid grid-cols-3 gap-2.5 w-full">
+                {featuredBrands.map((brand, idx) => (
+                  <div
+                    key={`mob-feat-${idx}`}
+                    style={{
+                      background: "rgba(255, 255, 255, 0.75)",
+                      backdropFilter: "blur(12px)",
+                      WebkitBackdropFilter: "blur(12px)",
+                      borderColor: "rgba(255, 255, 255, 0.8)",
+                    }}
+                    className="flex items-center justify-center h-[68px] sm:h-[76px] rounded-[16px] px-2 py-2 border shadow-[0_4px_20px_rgba(217,140,154,0.06)] active:scale-[0.98] transition-transform duration-200"
+                  >
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={brand.src}
+                        alt={brand.alt}
+                        fill
+                        sizes="90px"
+                        className="object-contain mix-blend-mode-multiply opacity-95"
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+
+            {/* Other Partnerships */}
+            <div className="flex flex-col gap-3">
+              <span className="block text-center font-sans text-[10px] font-semibold tracking-[0.25em] uppercase text-[#D98C9A]/70">
+                ✦ Brand Partners ✦
+              </span>
+              <div className="grid grid-cols-3 gap-2.5 w-full">
+                {otherBrands.map((brand, idx) => (
+                  <div
+                    key={`mob-other-${idx}`}
+                    style={{
+                      background: "rgba(255, 255, 255, 0.65)",
+                      backdropFilter: "blur(10px)",
+                      WebkitBackdropFilter: "blur(10px)",
+                      borderColor: "rgba(255, 255, 255, 0.7)",
+                    }}
+                    className="flex items-center justify-center h-[68px] sm:h-[76px] rounded-[16px] px-2 py-2 border shadow-[0_4px_15px_rgba(80,80,120,0.02)] active:scale-[0.98] transition-transform duration-200"
+                  >
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={brand.src}
+                        alt={brand.alt}
+                        fill
+                        sizes="90px"
+                        className="object-contain mix-blend-mode-multiply opacity-90"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

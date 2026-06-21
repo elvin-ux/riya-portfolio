@@ -25,10 +25,10 @@ export function HeroCopy() {
         Riya Francis
       </h1>
 
-      <p className="mt-12 max-w-[520px] font-[family-name:var(--font-serif)] text-[2.78rem] leading-[1.1] tracking-[-0.035em] text-[#1f1c1d]">
+      <p className="mt-12 max-w-[520px] font-[family-name:var(--font-serif)] text-[2.78rem] leading-[1.1] tracking-[-0.035em] text-[#1f1c1d] italic">
         You plan the celebration.
         <br />
-        I&apos;ll take care of the stage.
+        I’ll take care of the stage.
       </p>
 
       <p className="mt-12 pl-0.5 text-[0.74rem] font-semibold uppercase tracking-[0.45em] text-[#5f5558]">
@@ -36,14 +36,14 @@ export function HeroCopy() {
       </p>
 
       <div className="mt-11 max-w-[560px]">
-        <p className="text-[0.68rem] font-semibold uppercase tracking-[0.42em] text-[#918589]">
+        <p className="text-[0.68rem] font-semibold uppercase tracking-[0.42em] text-[#1A1A1A]">
           Featured On
         </p>
 
         <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.94rem] text-[#514c4d]">
           {featuredOn.map((item, index) => (
             <div key={item} className="flex items-center gap-5">
-              <span className="font-medium">{item}</span>
+              <span className="font-medium text-[#be707a]">{item}</span>
               {index < featuredOn.length - 1 ? (
                 <span
                   aria-hidden="true"

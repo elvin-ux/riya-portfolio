@@ -1,6 +1,5 @@
 import { HeroCopy } from "./hero-copy";
 import { HeroVisual } from "./hero-visual";
-import { SiteNav } from "./site-nav";
 
 export function HeroSection() {
   return (
@@ -27,8 +26,7 @@ export function HeroSection() {
         aria-hidden="true"
         className="absolute left-[-5%] top-[20%] h-[600px] w-[600px] rounded-full bg-[#FAE5E8] opacity-80 blur-[95px] pointer-events-none select-none z-0"
       />
-
-      <SiteNav />
+      {/* Removed SiteNav to render at global page level */}
 
       <div className="mx-auto flex min-h-screen max-w-[1440px] flex-col px-14 pb-4 pt-2">
         <div className="grid flex-1 grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] gap-0">

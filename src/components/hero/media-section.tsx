@@ -9,6 +9,7 @@ const logoItems = [
   { src: "/logos/images (1).jpg", alt: "Radio Lemon", scale: 1 },
   { src: "/logos/images (2).jpg", alt: "Plains FM", scale: 1 },
   { src: "/logos/indian-weekender-advertising.webp", alt: "India Weekender", scale: 1.15 },
+  { src: "/logos/bnz-diwali.png", alt: "BNZ Diwali", scale: 1 },
 ];
 
 export function MediaSection() {
@@ -38,7 +39,7 @@ export function MediaSection() {
         <div className="text-center mb-8 flex flex-col items-center">
           {/* Eyebrow */}
           <span className="block text-center font-sans text-[12px] font-medium tracking-[0.35em] uppercase text-[#D98C9A] mb-3">
-            As Seen Across
+            Hosted programs accross
           </span>
  
           {/* Main Heading */}

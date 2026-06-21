@@ -6,49 +6,49 @@ import { motion, useInView, AnimatePresence } from "motion/react";
 
 const desktopHighlights = [
   {
-    src: "/images/highlight-1.jpeg",
-    alt: "Celebrity Interview on Stage",
-    tag: "Celebrity Interview",
+    src: "/events/Award function.jpeg",
+    alt: "Award Function",
+    tag: "Award Function",
     rowSpan: "h-[250px]",
     colSpan: "md:col-span-1",
     objectPos: "object-[center_20%]",
   },
   {
-    src: "/images/highlight-2.jpeg",
-    alt: "Corporate Seminar Hosting",
-    tag: "Corporate Event",
+    src: "/events/Birthday Party.jpeg",
+    alt: "Birthday Party",
+    tag: "Birthday Party",
     rowSpan: "h-[250px]",
     colSpan: "md:col-span-2",
     objectPos: "object-[center_15%]",
   },
   {
-    src: "/images/highlight-3.jpeg",
-    alt: "Live Music Show MC",
-    tag: "Music Show",
+    src: "/events/Christmas celebration.jpeg",
+    alt: "Christmas Celebration",
+    tag: "Christmas Celebration",
     rowSpan: "h-[250px]",
     colSpan: "md:col-span-1",
     objectPos: "object-[center_25%]",
   },
   {
-    src: "/images/highlight-6.jpeg",
-    alt: "Sports Tournament Kickoff",
-    tag: "Sports Tournament",
+    src: "/events/music event.jpeg",
+    alt: "Music Event",
+    tag: "Music Event",
     rowSpan: "h-[250px]",
     colSpan: "md:col-span-2",
     objectPos: "object-[center_20%]",
   },
   {
-    src: "/images/highlight-4.jpeg",
-    alt: "Award Night Presentation",
-    tag: "Award Night",
+    src: "/events/onam celebration.jpeg",
+    alt: "Onam Celebration",
+    tag: "Onam Celebration",
     rowSpan: "h-[250px]",
     colSpan: "md:col-span-1",
     objectPos: "object-[center_20%]",
   },
   {
-    src: "/images/highlight-7.jpeg",
-    alt: "Media Event Coverage",
-    tag: "Media Event",
+    src: "/events/Corporate event.jpeg",
+    alt: "Corporate Event",
+    tag: "Corporate Event",
     rowSpan: "h-[250px]",
     colSpan: "md:col-span-1",
     objectPos: "object-[center_20%]",
@@ -56,20 +56,20 @@ const desktopHighlights = [
 ];
 
 const allImages = [
-  { src: "/images/highlight-1.jpeg", alt: "Riya hosting a celebrity interview", tag: "Celebrity Interview" },
-  { src: "/images/highlight-2.jpeg", alt: "Riya on stage for a corporate event", tag: "Corporate Event" },
-  { src: "/images/highlight-3.jpeg", alt: "Riya anchoring a live music show", tag: "Music Show" },
-  { src: "/images/highlight-6.jpeg", alt: "Riya at a sports tournament", tag: "Sports Tournament" },
-  { src: "/images/highlight-4.jpeg", alt: "Riya hosting an award night", tag: "Award Night" },
-  { src: "/images/highlight-7.jpeg", alt: "Riya at a media press event", tag: "Media Event" },
-  { src: "/images/highlight-5.jpeg", alt: "Riya hosting a cultural festival", tag: "Cultural Festival" },
-  { src: "/images/highlight-8.jpeg", alt: "Riya hosting a wedding ceremony", tag: "Wedding Ceremony" },
-  { src: "/images/highlight-9.jpeg", alt: "Riya on stage speaking", tag: "Public Speaking" },
-  { src: "/images/highlight-10.jpeg", alt: "Riya interviewing delegates", tag: "Conference & Expo" },
-  { src: "/images/highlight-11.jpeg", alt: "Riya at a corporate seminar", tag: "Corporate Seminar" },
-  { src: "/images/highlight-12.jpeg", alt: "Riya hosting an outdoor festival", tag: "Outdoor Festival" },
-  { src: "/images/highlight-13.jpeg", alt: "Riya presenting on stage", tag: "Stage Presentation" },
-  { src: "/images/highlight-14.jpeg", alt: "Riya Francis holding a mic", tag: "Live Anchor" },
+  { src: "/events/Award function.jpeg", alt: "Award Function", tag: "Award Function" },
+  { src: "/events/Birthday Party.jpeg", alt: "Birthday Party", tag: "Birthday Party" },
+  { src: "/events/Christmas celebration.jpeg", alt: "Christmas Celebration", tag: "Christmas Celebration" },
+  { src: "/events/music event.jpeg", alt: "Music Event", tag: "Music Event" },
+  { src: "/events/onam celebration.jpeg", alt: "Onam Celebration", tag: "Onam Celebration" },
+  { src: "/events/Corporate event.jpeg", alt: "Corporate Event", tag: "Corporate Event" },
+  { src: "/events/Anniversary event.jpeg", alt: "Anniversary Event", tag: "Anniversary Event" },
+  { src: "/events/Wedding.jpeg", alt: "Wedding", tag: "Wedding" },
+  { src: "/events/Bnz Diwali festival.jpeg", alt: "BNZ Diwali Festival", tag: "BNZ Diwali Festival" },
+  { src: "/events/Diwali Mela.jpeg", alt: "Diwali Mela", tag: "Diwali Mela" },
+  { src: "/events/Sports tournament.jpeg", alt: "Sports Tournament", tag: "Sports Tournament" },
+  { src: "/events/Holy communion.jpeg", alt: "Holy Communion", tag: "Holy Communion" },
+  { src: "/events/Miss India newzealand 2023 finalist.jpeg", alt: "Miss India New Zealand 2023 Finalist", tag: "Miss India New Zealand 2023 Finalist" },
+  { src: "/events/Birthday.jpeg", alt: "Birthday", tag: "Birthday" },
 ];
 
 const cuteAccents = [
@@ -121,9 +121,11 @@ export function HighlightsSection() {
 
   return (
     <section
-      id="highlights"
+      id="gallery"
       ref={containerRef}
-      className="relative px-6 md:px-14 lg:px-24 pt-12 pb-10 overflow-hidden z-10 flex flex-col items-center"
+      className={`relative px-6 md:px-14 lg:px-24 pt-12 pb-20 overflow-hidden flex flex-col items-center ${
+        isModalOpen ? "z-50" : "z-10"
+      }`}
       style={{
         background: "linear-gradient(135deg, #FDF8F9 0%, #F7F6FB 45%, #F4F8FD 100%)",
       }}
