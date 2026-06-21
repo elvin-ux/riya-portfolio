@@ -69,7 +69,7 @@ export function HeroVisual() {
             <feGaussianBlur in="dilated-glow" result="blurred-glow" stdDeviation="30" />
             <feFlood floodColor="#F4F6FB" floodOpacity={0.5} result="glow-color-1" />
             <feComposite in="glow-color-1" in2="blurred-glow" operator="in" result="glaze-outer" />
-            
+
             {/* Inner softer blush glow */}
             <feMorphology in="SourceAlpha" result="dilated-glow-2" operator="dilate" radius="6" />
             <feGaussianBlur in="dilated-glow-2" result="blurred-glow-2" stdDeviation="12" />
@@ -105,7 +105,7 @@ export function HeroVisual() {
             maskImage: "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 80%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 80%, transparent 100%)"
           }}
-          className="relative z-20 h-[92vh] w-auto max-w-none object-contain drop-shadow-[0_20px_50px_rgba(126,105,111,0.03)] -translate-y-[300px] md:-translate-y-[100px]"
+          className="relative z-20 h-[92vh] w-auto max-w-none object-contain drop-shadow-[0_20px_50px_rgba(126,105,111,0.03)] -translate-y-[100px]"
         />
       </motion.div>
 
