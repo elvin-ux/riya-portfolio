@@ -2,11 +2,14 @@
 
 import { motion } from "motion/react";
 
-const featuredOn = [
-  "24 News",
-  "Asianet Plus",
-  "Radio Lemon NZ",
-  "Shalom TV",
+const logoItems = [
+  { src: "/logos/Twenty_Four_News.webp", alt: "24 News", scale: 1 },
+  { src: "/logos/Asianet_Plus_Logo.jpg", alt: "Asianet Plus", scale: 1 },
+  { src: "/logos/ShalomTVlogo.png", alt: "Shalom TV", scale: 1.15 },
+  { src: "/logos/images (1).jpg", alt: "Radio Lemon", scale: 1 },
+  { src: "/logos/images (2).jpg", alt: "Plains FM", scale: 1 },
+  { src: "/logos/indian-weekender-advertising.webp", alt: "India Weekender", scale: 1.15 },
+  { src: "/logos/bnz-diwali.png", alt: "BNZ Diwali", scale: 1 },
 ];
 
 export function HeroCopy() {
@@ -40,16 +43,54 @@ export function HeroCopy() {
           Featured On
         </p>
 
-        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.94rem] text-[#514c4d]">
-          {featuredOn.map((item, index) => (
-            <div key={item} className="flex items-center gap-5">
-              <span className="font-medium text-[#be707a]">{item}</span>
-              {index < featuredOn.length - 1 ? (
-                <span
-                  aria-hidden="true"
-                  className="h-4 w-px bg-[#ece4e7]"
-                />
-              ) : null}
+        {/* Mobile View: Clean grid with 3 logos per row, centered, equal spacing */}
+        <div className="md:hidden grid grid-cols-3 gap-y-6 gap-x-5 items-center justify-items-center w-full max-w-[340px] mx-auto mt-5">
+          {logoItems.map((logo, idx) => (
+            <div
+              key={logo.alt}
+              className={`flex items-center justify-center ${
+                idx === 6 ? "col-span-3" : ""
+              }`}
+              style={{
+                transform: logo.scale !== 1 ? `scale(${logo.scale})` : undefined,
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                style={{
+                  height: "36px",
+                  objectFit: "contain",
+                  mixBlendMode: "multiply",
+                }}
+                className="w-auto select-none pointer-events-none"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop View: Single horizontal row, responsive, no wrap */}
+        <div className="hidden md:flex flex-row flex-nowrap items-center justify-between gap-x-3 w-full mt-5">
+          {logoItems.map((logo) => (
+            <div
+              key={logo.alt}
+              className="flex items-center justify-center shrink-0"
+              style={{
+                transform: logo.scale !== 1 ? `scale(${logo.scale})` : undefined,
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                style={{
+                  height: "32px",
+                  objectFit: "contain",
+                  mixBlendMode: "multiply",
+                }}
+                className="w-auto select-none pointer-events-none"
+              />
             </div>
           ))}
         </div>

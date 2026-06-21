@@ -105,7 +105,7 @@ export function HeroVisual() {
             maskImage: "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 80%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 80%, transparent 100%)"
           }}
-          className="relative z-20 h-[92vh] w-auto max-w-none object-contain drop-shadow-[0_20px_50px_rgba(126,105,111,0.03)] -translate-y-[100px]"
+          className="relative z-20 h-[92vh] w-auto max-w-none object-contain drop-shadow-[0_20px_50px_rgba(126,105,111,0.03)] -translate-y-[300px] md:-translate-y-[100px]"
         />
       </motion.div>
 
