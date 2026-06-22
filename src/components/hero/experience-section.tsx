@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 
 const stats = [
@@ -8,37 +8,6 @@ const stats = [
   { value: 200, suffix: "+", label: "Events Hosted" },
   { value: 1000, suffix: "+", label: "Hours On Stage" },
 ];
-
-function Counter({ value, duration = 1800, trigger = false }: { value: number; duration?: number; trigger: boolean }) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!trigger) return;
-    let startTimestamp: number | null = null;
-    let animationFrameId: number;
-
-    const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      // Easing: outQuad
-      const easedProgress = progress * (2 - progress);
-      setCount(Math.floor(easedProgress * value));
-      
-      if (progress < 1) {
-        animationFrameId = window.requestAnimationFrame(step);
-      } else {
-        setCount(value); // Ensure it ends exactly at value
-      }
-    };
-    
-    animationFrameId = window.requestAnimationFrame(step);
-    return () => {
-      window.cancelAnimationFrame(animationFrameId);
-    };
-  }, [value, duration, trigger]);
-
-  return <>{count}</>;
-}
 
 export function ExperienceSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -155,7 +124,7 @@ export function ExperienceSection() {
                     fontFeatureSettings: '"lnum"',
                   }}
                 >
-                  <Counter value={stat.value} trigger={isInView} />
+                  {stat.value}
                   {stat.suffix}
                 </span>
                 

@@ -60,32 +60,6 @@ export function HeroVisual() {
         className="absolute bottom-[20%] right-[12%] z-25 w-[380px] h-[380px] rounded-full bg-[#FAF3F3] opacity-[0.08] blur-[70px] pointer-events-none select-none"
       />
 
-      {/* SVG filter for the premium silhouette glazing effect (using React camelCase attributes) */}
-      <svg className="absolute h-0 w-0 pointer-events-none" aria-hidden="true">
-        <defs>
-          <filter id="luxury-glaze" x="-40%" y="-40%" width="180%" height="180%">
-            {/* Dilate source alpha for edge illumination */}
-            <feMorphology in="SourceAlpha" result="dilated-glow" operator="dilate" radius="16" />
-            <feGaussianBlur in="dilated-glow" result="blurred-glow" stdDeviation="30" />
-            <feFlood floodColor="#F4F6FB" floodOpacity={0.5} result="glow-color-1" />
-            <feComposite in="glow-color-1" in2="blurred-glow" operator="in" result="glaze-outer" />
-
-            {/* Inner softer blush glow */}
-            <feMorphology in="SourceAlpha" result="dilated-glow-2" operator="dilate" radius="6" />
-            <feGaussianBlur in="dilated-glow-2" result="blurred-glow-2" stdDeviation="12" />
-            <feFlood floodColor="#FAF3F3" floodOpacity={0.75} result="glow-color-2" />
-            <feComposite in="glow-color-2" in2="blurred-glow-2" operator="in" result="glaze-inner" />
-
-            {/* Merge the glazing glow layers under Riya's cutout */}
-            <feMerge>
-              <feMergeNode in="glaze-outer" />
-              <feMergeNode in="glaze-inner" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-      </svg>
-
       {/* Riya Cutout Image */}
       <motion.div
         initial={{ opacity: 0, y: 32 }}
@@ -94,14 +68,15 @@ export function HeroVisual() {
         className="relative z-20 flex h-full w-full items-end justify-center"
       >
         <Image
-          src="/images/riya-francis-cutout.png"
+          src="/images/riya-francis-cutout.webp"
           alt="Riya Francis holding a microphone on stage"
           width={1257}
           height={2048}
           priority
           sizes="56vw"
           style={{
-            filter: "url(#luxury-glaze)",
+            // CSS Drop shadow is GPU accelerated and much faster than SVG filters
+            filter: "drop-shadow(0px 0px 20px rgba(244, 246, 251, 0.6)) drop-shadow(0px 0px 8px rgba(250, 243, 243, 0.8))",
             maskImage: "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 80%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 80%, transparent 100%)"
           }}
