@@ -72,9 +72,9 @@ export function ExperienceSection() {
         <div className="text-center mb-6 md:mb-8">
           {/* Eyebrow Label: Fades in */}
           <motion.span
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="block text-center font-sans text-[11px] font-semibold tracking-[0.35em] uppercase text-[#D98C9A] mb-[10px]"
           >
             Proven Stage Presence
@@ -82,9 +82,9 @@ export function ExperienceSection() {
 
           {/* Main Heading: Muted Plum/Charcoal Gradient, Fades upward */}
           <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
             className="font-[family-name:var(--font-serif)] font-medium leading-tight text-center bg-clip-text text-transparent"
             style={{
               fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
@@ -103,12 +103,12 @@ export function ExperienceSection() {
             <div key={stat.label} className="contents">
               {/* Stat Item: Fades upward, staggered */}
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{
-                  duration: 0.8,
-                  delay: 0.2 + i * 0.12,
-                  ease: [0.25, 0.1, 0.25, 1],
+                  duration: 0.6,
+                  delay: 0.2 + i * 0.08,
+                  ease: "easeOut",
                 }}
                 className="text-center flex flex-col items-center"
               >
@@ -139,7 +139,7 @@ export function ExperienceSection() {
                 <motion.span
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                  transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+                  transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
                   aria-hidden="true"
                   className="w-[40px] h-px md:w-px md:h-[36px] block"
                   style={{ backgroundColor: "rgba(217,140,154,0.12)" }}

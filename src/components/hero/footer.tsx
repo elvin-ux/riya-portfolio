@@ -34,10 +34,10 @@ export function Footer() {
         
         {/* 1. Large Wide Sunflower Portrait Image - Visual Anchor */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="relative w-full max-w-[380px] md:max-w-[760px] h-[280px] md:h-auto md:aspect-[16/10] rounded-[28px] md:rounded-[36px] group mb-12 shadow-[0_15px_40px_rgba(217,140,154,0.1)] z-10"
         >
           {/* Offset Background Plate */}
@@ -52,7 +52,7 @@ export function Footer() {
               alt="Riya Francis in a sunflower field"
               fill
               sizes="(max-width: 768px) 100vw, 80vw"
-              className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.02]"
+              className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.02]"
               priority
             />
             {/* Very soft gradient shadow at the bottom */}
@@ -62,10 +62,10 @@ export function Footer() {
 
         {/* 2. GET IN TOUCH eyebrow */}
         <motion.span
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="block font-sans text-[12px] font-semibold tracking-[0.35em] uppercase text-[#D98C9A] mb-4 text-center"
         >
           ✦ GET IN TOUCH ✦
@@ -73,10 +73,10 @@ export function Footer() {
 
         {/* 3. Main heading */}
         <motion.h2
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="font-[family-name:var(--font-serif)] text-[32px] sm:text-[42px] lg:text-[48px] font-semibold text-[#2D2730] leading-[1.2] mb-5 tracking-tight max-w-[720px] text-center"
         >
           Let&apos;s Create Something Memorable Together
@@ -84,10 +84,10 @@ export function Footer() {
 
         {/* 4. Supporting copy */}
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.18, ease: "easeOut" }}
           className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-[#6D6670] mb-8 max-w-[620px] text-center"
         >
           Whether it&apos;s a corporate gala, cultural festival, community celebration, conference, or live stage event, I&apos;d love to bring warmth, energy, and connection to your audience.
@@ -95,10 +95,10 @@ export function Footer() {
 
         {/* 5. Contact Details (Phone & Email stacked) */}
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
           className="flex flex-col items-center gap-3.5 mb-8 w-full"
         >
           {/* Phone Link */}
@@ -106,7 +106,7 @@ export function Footer() {
             href="tel:+64223019841"
             className="inline-flex items-center gap-3 group font-sans font-semibold text-[#2D2730] hover:text-[#d97a87] transition-colors duration-300 py-1.5"
           >
-            <span className="flex items-center justify-center w-8 h-8 rounded-full border border-[#D98C9A]/30 bg-white/50 text-[#D98C9A] group-hover:bg-[#D98C9A] group-hover:text-white transition-all duration-300">
+            <span className="flex items-center justify-center w-8 h-8 rounded-full border border-[#D98C9A]/30 bg-white/50 text-[#D98C9A] group-hover:bg-[#D98C9A] group-hover:text-white transition-all duration-250 ease-out">
               <PhoneIcon size={14} className="stroke-[2]" />
             </span>
             <span className="text-[15px] sm:text-[16px] tracking-wide">+64 22 301 9841</span>
@@ -117,7 +117,7 @@ export function Footer() {
             href="mailto:Riyafrancis693@gmail.com"
             className="inline-flex items-center gap-3 group font-sans font-semibold text-[#2D2730] hover:text-[#d97a87] transition-colors duration-300 py-1.5"
           >
-            <span className="flex items-center justify-center w-8 h-8 rounded-full border border-[#D98C9A]/30 bg-white/50 text-[#D98C9A] group-hover:bg-[#D98C9A] group-hover:text-white transition-all duration-300">
+            <span className="flex items-center justify-center w-8 h-8 rounded-full border border-[#D98C9A]/30 bg-white/50 text-[#D98C9A] group-hover:bg-[#D98C9A] group-hover:text-white transition-all duration-250 ease-out">
               <MailIcon size={14} className="stroke-[2]" />
             </span>
             <span className="text-[15px] sm:text-[16px] tracking-wide">Riyafrancis693@gmail.com</span>
@@ -126,10 +126,10 @@ export function Footer() {
 
         {/* 6. Social Buttons Stack */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.32, ease: "easeOut" }}
           className="flex flex-col sm:flex-row sm:items-center justify-center gap-3.5 w-full mb-8 max-w-[500px] sm:max-w-none"
         >
           {/* Instagram Button */}
@@ -137,7 +137,7 @@ export function Footer() {
             href="https://www.instagram.com/coffeebean_with_a_mic"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-full border border-[#D98C9A]/25 px-6 py-3.5 bg-white/40 text-[#6D6670] hover:bg-white/80 hover:border-[#D98C9A] hover:text-[#d97a87] transition-all duration-300 font-sans font-medium text-[14px] w-full sm:w-auto"
+            className="flex items-center justify-center gap-2 rounded-full border border-[#D98C9A]/25 px-6 py-3.5 bg-white/40 text-[#6D6670] hover:bg-white/80 hover:border-[#D98C9A] hover:text-[#d97a87] hover:scale-[1.02] active:scale-[0.98] transition-all duration-250 ease-out font-sans font-medium text-[14px] w-full sm:w-auto"
           >
             <InstagramIcon size={15} className="text-[#be707a]" />
             <span>Instagram</span>
@@ -148,7 +148,7 @@ export function Footer() {
             href="https://www.facebook.com/share/1ES1MBpTXZ"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-full border border-[#D98C9A]/25 px-6 py-3.5 bg-white/40 text-[#6D6670] hover:bg-white/80 hover:border-[#D98C9A] hover:text-[#d97a87] transition-all duration-300 font-sans font-medium text-[14px] w-full sm:w-auto"
+            className="flex items-center justify-center gap-2 rounded-full border border-[#D98C9A]/25 px-6 py-3.5 bg-white/40 text-[#6D6670] hover:bg-white/80 hover:border-[#D98C9A] hover:text-[#d97a87] hover:scale-[1.02] active:scale-[0.98] transition-all duration-250 ease-out font-sans font-medium text-[14px] w-full sm:w-auto"
           >
             <FacebookIcon size={15} className="text-[#3b75c4]" />
             <span>Facebook</span>
@@ -157,10 +157,10 @@ export function Footer() {
 
         {/* 8. Location & Availability Badges */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
           className="flex flex-col sm:flex-row sm:items-center justify-center gap-3 w-full"
         >
           {/* Based in New Zealand */}

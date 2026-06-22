@@ -53,17 +53,17 @@ export function MediaSection() {
  
         {/* Single Premium Logo Showcase Card */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           style={{
             background: "rgba(255, 255, 255, 0.55)",
             backdropFilter: "blur(20px)",
             WebkitBackdropFilter: "blur(20px)",
             borderColor: "rgba(255, 255, 255, 0.8)",
           }}
-          className="group w-full rounded-[36px] px-8 py-8 md:px-12 border transition-all duration-300 hover:translate-y-[-4px] hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] flex flex-col items-center"
+          className="group w-full rounded-[36px] px-8 py-8 md:px-12 border transition-all duration-250 ease-out hover:translate-y-[-4px] hover:shadow-[0_12px_40px_rgba(0,0,0,0.06)] flex flex-col items-center"
         >
           {/* Horizontal Logo Strip */}
           <div className="flex flex-wrap md:flex-nowrap justify-center items-center gap-8 md:gap-[56px] w-full">

@@ -15,9 +15,9 @@ const logoItems = [
 export function HeroCopy() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className="max-w-[560px]"
     >
       <p className="pl-0.5 text-[0.98rem] font-medium tracking-[0.08em] text-[#c58a92]">

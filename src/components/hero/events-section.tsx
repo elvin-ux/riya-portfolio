@@ -58,13 +58,13 @@ export function EventsSection() {
             return (
               <motion.div
                 key={category.name}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{
-                  duration: 0.8,
-                  delay: i * 0.08,
-                  ease: [0.25, 0.1, 0.25, 1],
+                  duration: 0.6,
+                  delay: i * 0.05,
+                  ease: "easeOut",
                 }}
                 style={{
                   background: "rgba(255, 255, 255, 0.72)",
@@ -73,7 +73,7 @@ export function EventsSection() {
                   borderColor: "rgba(255, 255, 255, 0.9)",
                   boxShadow: "0 10px 30px rgba(80, 80, 120, 0.06)",
                 }}
-                className={`group flex items-center justify-center gap-2 rounded-full border transition-all duration-300 hover:translate-y-[-4px] hover:bg-white/85 hover:shadow-[0_12px_35px_rgba(217,140,154,0.06)] cursor-pointer text-center w-full max-w-[280px] md:max-w-none ${
+                className={`group flex items-center justify-center gap-2 rounded-full border transition-all duration-250 ease-out hover:translate-y-[-4px] hover:bg-white/85 hover:shadow-[0_12px_35px_rgba(217,140,154,0.06)] cursor-pointer text-center w-full max-w-[280px] md:max-w-none ${
                   isPrimary
                     ? "px-5 py-4 md:px-[28px] md:py-[18px]"
                     : "px-4 py-3.5 md:px-[22px] md:py-[14px] opacity-90 hover:opacity-100"

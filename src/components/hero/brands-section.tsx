@@ -158,7 +158,7 @@ export function BrandsSection() {
                     WebkitBackdropFilter: "blur(12px)",
                     borderColor: "rgba(255, 255, 255, 0.6)",
                   }}
-                  className="flex items-center justify-center w-[210px] h-[88px] rounded-[24px] px-6 py-4 border shadow-[0_4px_15px_rgba(80,80,120,0.02)] transition-all duration-300 hover:translate-y-[-6px] hover:scale-[1.03] hover:shadow-[0_8px_25px_rgba(217,140,154,0.15)] hover:border-[#D98C9A]/30 cursor-pointer"
+                  className="flex items-center justify-center w-[210px] h-[88px] rounded-[24px] px-6 py-4 border shadow-[0_4px_15px_rgba(80,80,120,0.02)] transition-all duration-250 ease-out hover:translate-y-[-4px] hover:shadow-[0_8px_25px_rgba(217,140,154,0.08)] hover:border-[#D98C9A]/20 cursor-pointer"
                 >
                   <div className="relative w-full h-full">
                     <Image
@@ -184,7 +184,7 @@ export function BrandsSection() {
                     WebkitBackdropFilter: "blur(12px)",
                     borderColor: "rgba(255, 255, 255, 0.6)",
                   }}
-                  className="flex items-center justify-center w-[210px] h-[88px] rounded-[24px] px-6 py-4 border shadow-[0_4px_15px_rgba(80,80,120,0.02)] transition-all duration-300 hover:translate-y-[-6px] hover:scale-[1.03] hover:shadow-[0_8px_25px_rgba(217,140,154,0.15)] hover:border-[#D98C9A]/30 cursor-pointer"
+                  className="flex items-center justify-center w-[210px] h-[88px] rounded-[24px] px-6 py-4 border shadow-[0_4px_15px_rgba(80,80,120,0.02)] transition-all duration-250 ease-out hover:translate-y-[-4px] hover:shadow-[0_8px_25px_rgba(217,140,154,0.08)] hover:border-[#D98C9A]/20 cursor-pointer"
                 >
                   <div className="relative w-full h-full">
                     <Image

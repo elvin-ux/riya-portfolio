@@ -40,18 +40,14 @@ export function HeroVisual() {
         }}
       />
 
-      {/* 4. Faint bokeh highlights (extremely soft and slow drifting) */}
-      <motion.div
+      {/* 4. Faint bokeh highlights (completely static for performance) */}
+      <div
         aria-hidden="true"
         className="absolute right-[25%] top-[25%] h-[140px] w-[140px] rounded-full bg-[#FFFFFF] opacity-35 blur-[35px] pointer-events-none select-none z-0"
-        animate={{ y: [0, -12, 0], x: [0, 6, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.div
+      <div
         aria-hidden="true"
         className="absolute right-[8%] top-[40%] h-[180px] w-[180px] rounded-full bg-[#F4F6FB] opacity-30 blur-[45px] pointer-events-none select-none z-0"
-        animate={{ y: [0, 10, 0], x: [0, -8, 0] }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* CUTOUT INTEGRATION: Faint light wrap in front of the subject to embed it */}
@@ -62,9 +58,9 @@ export function HeroVisual() {
 
       {/* Riya Cutout Image */}
       <motion.div
-        initial={{ opacity: 0, y: 32 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className="relative z-20 flex h-full w-full items-end justify-center"
       >
         <Image

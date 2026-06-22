@@ -214,12 +214,12 @@ export function HighlightsSection() {
           {desktopHighlights.map((image, i) => (
             <motion.div
               key={image.src}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{
-                duration: 0.7,
-                delay: i * 0.08,
-                ease: [0.22, 1, 0.36, 1],
+                duration: 0.6,
+                delay: i * 0.05,
+                ease: "easeOut",
               }}
               style={{
                 boxShadow: "0 10px 30px rgba(80, 80, 120, 0.04)",
@@ -241,9 +241,9 @@ export function HighlightsSection() {
                   alt={image.alt}
                   fill
                   sizes={image.colSpan.includes("col-span-2") ? "50vw" : "25vw"}
-                  className={`object-cover ${image.objectPos} transition-transform duration-600 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.03]`}
+                  className={`object-cover ${image.objectPos} transition-transform duration-300 ease-out group-hover:scale-[1.03]`}
                 />
-                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 backdrop-blur-[2px] z-10" />
+                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] z-10" />
               </div>
             </motion.div>
           ))}
@@ -305,10 +305,10 @@ export function HighlightsSection() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => setIsModalOpen(true)}
-            className="group flex items-center gap-2 rounded-full px-8 py-3.5 bg-white/60 backdrop-blur-md border border-[#D98C9A]/30 text-[#2D2730] font-sans font-medium text-[14px] md:text-[15px] tracking-wide shadow-[0_8px_25px_rgba(217,140,154,0.08)] cursor-pointer hover:bg-white/80 hover:border-[#D98C9A] hover:shadow-[0_12px_30px_rgba(217,140,154,0.18)] transition-all duration-300"
+            className="group flex items-center gap-2 rounded-full px-8 py-3.5 bg-white/60 backdrop-blur-md border border-[#D98C9A]/30 text-[#2D2730] font-sans font-medium text-[14px] md:text-[15px] tracking-wide shadow-[0_8px_25px_rgba(217,140,154,0.08)] cursor-pointer hover:bg-white/80 hover:border-[#D98C9A] hover:shadow-[0_12px_30px_rgba(217,140,154,0.18)] transition-all duration-250 ease-out"
           >
             <span>View Full Gallery</span>
-            <span className="transform transition-transform duration-300 group-hover:translate-x-1">
+            <span className="transform transition-transform duration-250 ease-out group-hover:translate-x-1">
               →
             </span>
           </motion.button>
