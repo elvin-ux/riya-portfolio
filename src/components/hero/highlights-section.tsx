@@ -81,6 +81,16 @@ const cuteAccents = [
   { type: "heart", bottom: "10%", left: "20%", size: 12 },
 ];
 
+const HeartIcon = ({ filled = true }: { filled?: boolean }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={`w-3.5 h-3.5 ${filled ? "fill-[#D98C9A]" : "stroke-[#D98C9A] fill-none"}`}
+    strokeWidth={2}
+  >
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+  </svg>
+);
+
 export function HighlightsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -105,20 +115,14 @@ export function HighlightsSection() {
       const scrollLeft = scrollRef.current.scrollLeft;
       requestAnimationFrame(() => {
         const index = Math.round(scrollLeft / 300);
-        setActiveIndex(Math.min(Math.max(index, 0), desktopHighlights.length - 1));
+        const newIndex = Math.min(Math.max(index, 0), desktopHighlights.length - 1);
+        setActiveIndex((prev) => {
+          if (prev !== newIndex) return newIndex;
+          return prev;
+        });
       });
     }
   };
-
-  const HeartIcon = ({ filled = true }: { filled?: boolean }) => (
-    <svg
-      viewBox="0 0 24 24"
-      className={`w-3.5 h-3.5 ${filled ? "fill-[#D98C9A]" : "stroke-[#D98C9A] fill-none"}`}
-      strokeWidth={2}
-    >
-      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-    </svg>
-  );
 
   return (
     <section
