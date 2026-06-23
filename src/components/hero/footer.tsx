@@ -23,11 +23,11 @@ export function Footer() {
       {/* Subtle Background Glows */}
       <div
         aria-hidden="true"
-        className="absolute bottom-[-10%] left-1/4 h-[350px] w-[500px] rounded-full bg-[#FAE5E8] opacity-[0.2] blur-[90px] pointer-events-none select-none z-0"
+        className="absolute bottom-[-10%] left-1/4 h-[350px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(250,229,232,0.2)_0%,rgba(250,229,232,0)_70%)] pointer-events-none select-none z-0"
       />
       <div
         aria-hidden="true"
-        className="absolute top-[10%] right-1/4 h-[300px] w-[450px] rounded-full bg-[#E4EEFC] opacity-[0.15] blur-[80px] pointer-events-none select-none z-0"
+        className="absolute top-[10%] right-1/4 h-[300px] w-[450px] rounded-full bg-[radial-gradient(circle,rgba(228,238,252,0.15)_0%,rgba(228,238,252,0)_70%)] pointer-events-none select-none z-0"
       />
 
       <div className="relative mx-auto max-w-[1240px] w-full z-10 px-6 md:px-14 lg:px-24 pt-16 md:pt-24 pb-12 flex flex-col items-center">

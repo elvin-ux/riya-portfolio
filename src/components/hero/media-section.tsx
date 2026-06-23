@@ -27,11 +27,11 @@ export function MediaSection() {
       */}
       <div
         aria-hidden="true"
-        className="absolute left-[10%] top-[20%] h-[250px] w-[250px] rounded-full bg-[rgba(255,208,223,0.18)] blur-[60px] pointer-events-none select-none z-0"
+        className="absolute left-[10%] top-[20%] h-[250px] w-[250px] rounded-full bg-[radial-gradient(circle,rgba(255,208,223,0.18)_0%,rgba(255,208,223,0)_70%)] pointer-events-none select-none z-0"
       />
       <div
         aria-hidden="true"
-        className="absolute right-[10%] bottom-[20%] h-[250px] w-[250px] rounded-full bg-[rgba(215,228,255,0.18)] blur-[60px] pointer-events-none select-none z-0"
+        className="absolute right-[10%] bottom-[20%] h-[250px] w-[250px] rounded-full bg-[radial-gradient(circle,rgba(215,228,255,0.18)_0%,rgba(215,228,255,0)_70%)] pointer-events-none select-none z-0"
       />
  
       <div className="relative mx-auto max-w-[1200px] w-full z-10">
@@ -80,7 +80,7 @@ export function MediaSection() {
                   src={logo.src}
                   alt={logo.alt}
                   style={{
-                    height: "60px",
+                    height: "95px",
                     objectFit: "contain",
                     mixBlendMode: "multiply",
                     filter: "opacity(95%)",

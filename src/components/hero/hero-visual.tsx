@@ -73,10 +73,8 @@ export function HeroVisual() {
           style={{
             // CSS Drop shadow is GPU accelerated and much faster than SVG filters
             filter: "drop-shadow(0px 0px 20px rgba(244, 246, 251, 0.6)) drop-shadow(0px 0px 8px rgba(250, 243, 243, 0.8))",
-            maskImage: "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 80%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.4) 80%, transparent 100%)"
           }}
-          className="relative z-20 h-[92vh] w-auto max-w-none object-contain drop-shadow-[0_20px_50px_rgba(126,105,111,0.03)] -translate-y-[100px]"
+          className="relative z-20 h-[92vh] w-auto max-w-none object-contain drop-shadow-[0_20px_50px_rgba(126,105,111,0.03)] -translate-y-[100px] [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]"
         />
       </motion.div>
 

@@ -67,9 +67,7 @@ export function EventsSection() {
                   ease: "easeOut",
                 }}
                 style={{
-                  background: "rgba(255, 255, 255, 0.72)",
-                  backdropFilter: "blur(18px)",
-                  WebkitBackdropFilter: "blur(18px)",
+                  background: "rgba(255, 255, 255, 0.92)",
                   borderColor: "rgba(255, 255, 255, 0.9)",
                   boxShadow: "0 10px 30px rgba(80, 80, 120, 0.06)",
                 }}
