@@ -103,9 +103,10 @@ export function HighlightsSection() {
   const handleScroll = () => {
     if (scrollRef.current) {
       const scrollLeft = scrollRef.current.scrollLeft;
-      const cardWidth = scrollRef.current.scrollWidth / desktopHighlights.length;
-      const index = Math.round(scrollLeft / cardWidth);
-      setActiveIndex(Math.min(Math.max(index, 0), desktopHighlights.length - 1));
+      requestAnimationFrame(() => {
+        const index = Math.round(scrollLeft / 300);
+        setActiveIndex(Math.min(Math.max(index, 0), desktopHighlights.length - 1));
+      });
     }
   };
 
@@ -133,15 +134,18 @@ export function HighlightsSection() {
       {/* ATMOSPHERIC GLOWS */}
       <div
         aria-hidden="true"
-        className="absolute top-[10%] left-[5%] h-[350px] w-[350px] rounded-full bg-[#FAE5E8] opacity-[0.06] blur-[90px] pointer-events-none select-none z-0"
+        className="absolute top-[10%] left-[5%] h-[350px] w-[350px] rounded-full pointer-events-none select-none z-0 transform-gpu"
+        style={{ background: "radial-gradient(circle, rgba(250, 229, 232, 0.06) 0%, transparent 60%)" }}
       />
       <div
         aria-hidden="true"
-        className="absolute bottom-[20%] right-[10%] h-[400px] w-[400px] rounded-full bg-[#E4EEFC] opacity-[0.07] blur-[100px] pointer-events-none select-none z-0"
+        className="absolute bottom-[20%] right-[10%] h-[400px] w-[400px] rounded-full pointer-events-none select-none z-0 transform-gpu"
+        style={{ background: "radial-gradient(circle, rgba(228, 238, 252, 0.07) 0%, transparent 60%)" }}
       />
       <div
         aria-hidden="true"
-        className="absolute top-[40%] right-[20%] h-[300px] w-[300px] rounded-full bg-white opacity-[0.08] blur-[70px] pointer-events-none select-none z-0"
+        className="absolute top-[40%] right-[20%] h-[300px] w-[300px] rounded-full pointer-events-none select-none z-0 transform-gpu"
+        style={{ background: "radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%)" }}
       />
 
       {/* CUTE DECORATIVE ACCENTS */}
@@ -254,7 +258,7 @@ export function HighlightsSection() {
           <div
             ref={scrollRef}
             onScroll={handleScroll}
-            className="flex overflow-x-auto gap-5 px-6 pb-6 pt-2 w-screen scrollbar-none snap-x snap-mandatory overflow-y-visible"
+            className="flex overflow-x-auto gap-5 px-6 pb-6 pt-2 w-screen scrollbar-none snap-x snap-mandatory overflow-y-visible transform-gpu"
             style={{
               paddingLeft: "calc(50vw - 140px)",
               paddingRight: "calc(50vw - 140px)",

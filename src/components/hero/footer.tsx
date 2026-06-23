@@ -9,6 +9,28 @@ import {
   Mail as MailIcon 
 } from "lucide-react";
 
+const containerVariants = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+} as const;
+
+const childVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+} as const;
+
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -30,14 +52,17 @@ export function Footer() {
         className="absolute top-[10%] right-1/4 h-[300px] w-[450px] rounded-full bg-[radial-gradient(circle,rgba(228,238,252,0.15)_0%,rgba(228,238,252,0)_70%)] pointer-events-none select-none z-0"
       />
 
-      <div className="relative mx-auto max-w-[1240px] w-full z-10 px-6 md:px-14 lg:px-24 pt-16 md:pt-24 pb-12 flex flex-col items-center">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="relative mx-auto max-w-[1240px] w-full z-10 px-6 md:px-14 lg:px-24 pt-16 md:pt-24 pb-12 flex flex-col items-center"
+      >
         
         {/* 1. Large Wide Sunflower Portrait Image - Visual Anchor */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          variants={childVariants}
           className="relative w-full max-w-[380px] md:max-w-[760px] h-[280px] md:h-auto md:aspect-[16/10] rounded-[28px] md:rounded-[36px] group mb-12 shadow-[0_15px_40px_rgba(217,140,154,0.1)] z-10"
         >
           {/* Offset Background Plate */}
@@ -53,7 +78,6 @@ export function Footer() {
               fill
               sizes="(max-width: 768px) 100vw, 80vw"
               className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.02]"
-              priority
             />
             {/* Very soft gradient shadow at the bottom */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-50 z-10 pointer-events-none" />
@@ -62,10 +86,7 @@ export function Footer() {
 
         {/* 2. GET IN TOUCH eyebrow */}
         <motion.span
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          variants={childVariants}
           className="block font-sans text-[12px] font-semibold tracking-[0.35em] uppercase text-[#D98C9A] mb-4 text-center"
         >
           ✦ GET IN TOUCH ✦
@@ -73,10 +94,7 @@ export function Footer() {
 
         {/* 3. Main heading */}
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          variants={childVariants}
           className="font-[family-name:var(--font-serif)] text-[32px] sm:text-[42px] lg:text-[48px] font-semibold text-[#2D2730] leading-[1.2] mb-5 tracking-tight max-w-[720px] text-center"
         >
           Let&apos;s Create Something Memorable Together
@@ -84,10 +102,7 @@ export function Footer() {
 
         {/* 4. Supporting copy */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.18, ease: "easeOut" }}
+          variants={childVariants}
           className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-[#6D6670] mb-8 max-w-[620px] text-center"
         >
           Whether it&apos;s a corporate gala, cultural festival, community celebration, conference, or live stage event, I&apos;d love to bring warmth, energy, and connection to your audience.
@@ -95,10 +110,7 @@ export function Footer() {
 
         {/* 5. Contact Details (Phone & Email stacked) */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
+          variants={childVariants}
           className="flex flex-col items-center gap-3.5 mb-8 w-full"
         >
           {/* Phone Link */}
@@ -126,10 +138,7 @@ export function Footer() {
 
         {/* 6. Social Buttons Stack */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.32, ease: "easeOut" }}
+          variants={childVariants}
           className="flex flex-col sm:flex-row sm:items-center justify-center gap-3.5 w-full mb-8 max-w-[500px] sm:max-w-none"
         >
           {/* Instagram Button */}
@@ -157,10 +166,7 @@ export function Footer() {
 
         {/* 8. Location & Availability Badges */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          variants={childVariants}
           className="flex flex-col sm:flex-row sm:items-center justify-center gap-3 w-full"
         >
           {/* Based in New Zealand */}
@@ -204,7 +210,7 @@ export function Footer() {
             &copy; {currentYear} Riya Francis &bull; All Rights Reserved
           </p>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 }

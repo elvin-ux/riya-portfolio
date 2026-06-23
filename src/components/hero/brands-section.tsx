@@ -77,11 +77,13 @@ export function BrandsSection() {
       {/* ATMOSPHERIC DEPT LIGHT BLENDS */}
       <div
         aria-hidden="true"
-        className="absolute top-1/2 left-[5%] -translate-y-1/2 h-[220px] w-[220px] rounded-full bg-[#FAE5E8] opacity-[0.05] blur-[80px] pointer-events-none select-none z-0"
+        className="absolute top-1/2 left-[5%] -translate-y-1/2 h-[220px] w-[220px] rounded-full pointer-events-none select-none z-0 transform-gpu"
+        style={{ background: "radial-gradient(circle, rgba(250, 229, 232, 0.05) 0%, transparent 60%)" }}
       />
       <div
         aria-hidden="true"
-        className="absolute top-1/2 right-[5%] -translate-y-1/2 h-[220px] w-[220px] rounded-full bg-[#E4EEFC] opacity-[0.05] blur-[80px] pointer-events-none select-none z-0"
+        className="absolute top-1/2 right-[5%] -translate-y-1/2 h-[220px] w-[220px] rounded-full pointer-events-none select-none z-0 transform-gpu"
+        style={{ background: "radial-gradient(circle, rgba(228, 238, 252, 0.05) 0%, transparent 60%)" }}
       />
 
       {/* CUTE DECORATIVE ACCENTS (Opacity below 5%) */}
@@ -148,14 +150,12 @@ export function BrandsSection() {
           {/* DESKTOP VIEW: Double Row Marquee */}
           <div className="hidden md:flex flex-col gap-4 w-full">
             {/* Top Row: Scroll Left */}
-            <div className="flex w-max gap-4 marquee-scroll-left">
+            <div className="flex w-max gap-4 marquee-scroll-left transform-gpu">
               {[...row1Brands, ...row1Brands].map((brand, idx) => (
                 <div
                   key={`r1-${idx}`}
                   style={{
-                    background: "rgba(255, 255, 255, 0.7)",
-                    backdropFilter: "blur(12px)",
-                    WebkitBackdropFilter: "blur(12px)",
+                    background: "rgba(255, 255, 255, 0.95)",
                     borderColor: "rgba(255, 255, 255, 0.6)",
                   }}
                   className="flex items-center justify-center w-[210px] h-[88px] rounded-[24px] px-6 py-4 border shadow-[0_4px_15px_rgba(80,80,120,0.02)] transition-all duration-250 ease-out hover:translate-y-[-4px] hover:shadow-[0_8px_25px_rgba(217,140,154,0.08)] hover:border-[#D98C9A]/20 cursor-pointer"
@@ -166,7 +166,7 @@ export function BrandsSection() {
                       alt={brand.alt}
                       fill
                       sizes="210px"
-                      className="object-contain mix-blend-mode-multiply opacity-90"
+                      className="object-contain opacity-90"
                     />
                   </div>
                 </div>
@@ -174,14 +174,12 @@ export function BrandsSection() {
             </div>
  
             {/* Bottom Row: Scroll Right */}
-            <div className="flex w-max gap-4 marquee-scroll-right">
+            <div className="flex w-max gap-4 marquee-scroll-right transform-gpu">
               {[...row2Brands, ...row2Brands].map((brand, idx) => (
                 <div
                   key={`r2-${idx}`}
                   style={{
-                    background: "rgba(255, 255, 255, 0.7)",
-                    backdropFilter: "blur(12px)",
-                    WebkitBackdropFilter: "blur(12px)",
+                    background: "rgba(255, 255, 255, 0.95)",
                     borderColor: "rgba(255, 255, 255, 0.6)",
                   }}
                   className="flex items-center justify-center w-[210px] h-[88px] rounded-[24px] px-6 py-4 border shadow-[0_4px_15px_rgba(80,80,120,0.02)] transition-all duration-250 ease-out hover:translate-y-[-4px] hover:shadow-[0_8px_25px_rgba(217,140,154,0.08)] hover:border-[#D98C9A]/20 cursor-pointer"
@@ -192,7 +190,7 @@ export function BrandsSection() {
                       alt={brand.alt}
                       fill
                       sizes="210px"
-                      className="object-contain mix-blend-mode-multiply opacity-90"
+                      className="object-contain opacity-90"
                     />
                   </div>
                 </div>
@@ -212,9 +210,7 @@ export function BrandsSection() {
                   <div
                     key={`mob-feat-${idx}`}
                     style={{
-                      background: "rgba(255, 255, 255, 0.75)",
-                      backdropFilter: "blur(12px)",
-                      WebkitBackdropFilter: "blur(12px)",
+                      background: "rgba(255, 255, 255, 0.95)",
                       borderColor: "rgba(255, 255, 255, 0.8)",
                     }}
                     className="flex items-center justify-center h-[68px] sm:h-[76px] rounded-[16px] px-2 py-2 border shadow-[0_4px_20px_rgba(217,140,154,0.06)] active:scale-[0.98] transition-transform duration-200"
@@ -225,7 +221,7 @@ export function BrandsSection() {
                         alt={brand.alt}
                         fill
                         sizes="90px"
-                        className="object-contain mix-blend-mode-multiply opacity-95"
+                        className="object-contain opacity-95"
                       />
                     </div>
                   </div>
@@ -243,9 +239,7 @@ export function BrandsSection() {
                   <div
                     key={`mob-other-${idx}`}
                     style={{
-                      background: "rgba(255, 255, 255, 0.65)",
-                      backdropFilter: "blur(10px)",
-                      WebkitBackdropFilter: "blur(10px)",
+                      background: "rgba(255, 255, 255, 0.95)",
                       borderColor: "rgba(255, 255, 255, 0.7)",
                     }}
                     className="flex items-center justify-center h-[68px] sm:h-[76px] rounded-[16px] px-2 py-2 border shadow-[0_4px_15px_rgba(80,80,120,0.02)] active:scale-[0.98] transition-transform duration-200"
@@ -256,7 +250,7 @@ export function BrandsSection() {
                         alt={brand.alt}
                         fill
                         sizes="90px"
-                        className="object-contain mix-blend-mode-multiply opacity-90"
+                        className="object-contain opacity-90"
                       />
                     </div>
                   </div>
