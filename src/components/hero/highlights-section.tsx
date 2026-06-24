@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, memo } from "react";
 import Image from "next/image";
 import { motion, useInView, AnimatePresence } from "motion/react";
 
@@ -72,7 +72,7 @@ const allImages = [
   { src: "/events/Birthday.jpeg", alt: "Birthday", tag: "Birthday" },
 ];
 
-const cuteAccents = [
+const cuteAccentsData = [
   { type: "sparkle", top: "15%", left: "10%", size: 16 },
   { type: "heart", top: "25%", right: "8%", size: 14 },
   { type: "star", bottom: "35%", left: "6%", size: 12 },
@@ -91,50 +91,10 @@ const HeartIcon = ({ filled = true }: { filled?: boolean }) => (
   </svg>
 );
 
-export function HighlightsSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // Lock body scroll when modal is open
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isModalOpen]);
-
-  const handleScroll = () => {
-    if (scrollRef.current) {
-      const scrollLeft = scrollRef.current.scrollLeft;
-      requestAnimationFrame(() => {
-        const index = Math.round(scrollLeft / 300);
-        const newIndex = Math.min(Math.max(index, 0), desktopHighlights.length - 1);
-        setActiveIndex((prev) => {
-          if (prev !== newIndex) return newIndex;
-          return prev;
-        });
-      });
-    }
-  };
-
+// Fix 4: Memoized static decorations — never re-renders due to parent state changes
+const StaticDecorations = memo(function StaticDecorations() {
   return (
-    <section
-      id="gallery"
-      ref={containerRef}
-      className={`relative px-6 md:px-14 lg:px-24 pt-12 pb-20 overflow-hidden flex flex-col items-center ${
-        isModalOpen ? "z-50" : "z-10"
-      }`}
-      style={{
-        background: "linear-gradient(135deg, #FDF8F9 0%, #F7F6FB 45%, #F4F8FD 100%)",
-      }}
-    >
+    <>
       {/* ATMOSPHERIC GLOWS */}
       <div
         aria-hidden="true"
@@ -153,7 +113,7 @@ export function HighlightsSection() {
       />
 
       {/* CUTE DECORATIVE ACCENTS */}
-      {cuteAccents.map((accent, idx) => (
+      {cuteAccentsData.map((accent, idx) => (
         <span
           key={idx}
           className="absolute text-[#D98C9A]/20 pointer-events-none select-none z-0"
@@ -199,6 +159,85 @@ export function HighlightsSection() {
           )}
         </span>
       ))}
+    </>
+  );
+});
+
+// Fix 1 (Option B): IntersectionObserver-based mobile scroll tracker — no onScroll needed
+function useMobileScrollIndex(
+  scrollRef: React.RefObject<HTMLDivElement | null>,
+  count: number
+) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+
+    const cards = Array.from(container.children) as HTMLElement[];
+    if (cards.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Find the entry with the highest intersection ratio
+        let best = { ratio: -1, index: 0 };
+        entries.forEach((entry) => {
+          const idx = cards.indexOf(entry.target as HTMLElement);
+          if (idx !== -1 && entry.intersectionRatio > best.ratio) {
+            best = { ratio: entry.intersectionRatio, index: idx };
+          }
+        });
+        if (best.ratio > 0) {
+          setActiveIndex(best.index);
+        }
+      },
+      {
+        root: container,
+        threshold: [0.5, 0.75, 1.0],
+      }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, [scrollRef, count]);
+
+  return activeIndex;
+}
+
+export function HighlightsSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Fix 1: IntersectionObserver replaces the onScroll handler entirely
+  const activeIndex = useMobileScrollIndex(scrollRef, desktopHighlights.length);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isModalOpen]);
+
+  return (
+    <section
+      id="gallery"
+      ref={containerRef}
+      className={`relative px-6 md:px-14 lg:px-24 pt-12 pb-20 overflow-hidden flex flex-col items-center ${
+        isModalOpen ? "z-50" : "z-10"
+      }`}
+      style={{
+        background: "linear-gradient(135deg, #FDF8F9 0%, #F7F6FB 45%, #F4F8FD 100%)",
+      }}
+    >
+      {/* Fix 4: Memoized — won't re-render when activeIndex or isModalOpen changes */}
+      <StaticDecorations />
 
       <div className="relative mx-auto max-w-[1240px] w-full z-10">
         {/* Section Header Block */}
@@ -242,7 +281,7 @@ export function HighlightsSection() {
                 <span>{image.tag}</span>
               </div>
 
-              {/* Card Image */}
+              {/* Card Image — Fix 3: priority on first 3 desktop cards */}
               <div className="relative w-full h-full overflow-hidden">
                 <Image
                   src={image.src}
@@ -250,6 +289,8 @@ export function HighlightsSection() {
                   fill
                   sizes={image.colSpan.includes("col-span-2") ? "50vw" : "25vw"}
                   className={`object-cover ${image.objectPos} transition-transform duration-300 ease-out group-hover:scale-[1.03]`}
+                  priority={i < 3}
+                  quality={75}
                 />
                 <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] z-10" />
               </div>
@@ -259,16 +300,16 @@ export function HighlightsSection() {
 
         {/* MOBILE VIEW (Horizontal Swipe Gallery) */}
         <div className="md:hidden flex flex-col items-center w-full">
+          {/* Fix 1: No onScroll handler — IntersectionObserver tracks active card */}
           <div
             ref={scrollRef}
-            onScroll={handleScroll}
             className="flex overflow-x-auto gap-5 px-6 pb-6 pt-2 w-screen scrollbar-none snap-x snap-mandatory overflow-y-visible transform-gpu"
             style={{
               paddingLeft: "calc(50vw - 140px)",
               paddingRight: "calc(50vw - 140px)",
             }}
           >
-            {desktopHighlights.map((image) => (
+            {desktopHighlights.map((image, i) => (
               <div
                 key={`mobile-${image.src}`}
                 className="snap-center flex-shrink-0 w-[280px] aspect-[4/5] relative rounded-[24px] overflow-hidden border border-white/50 shadow-lg cursor-pointer"
@@ -281,12 +322,15 @@ export function HighlightsSection() {
                 </div>
 
                 <div className="relative w-full h-full">
+                  {/* Fix 3: priority on first 2 mobile cards, lazy rest */}
                   <Image
                     src={image.src}
                     alt={image.alt}
                     fill
                     sizes="280px"
                     className={`object-cover ${image.objectPos}`}
+                    priority={i < 2}
+                    quality={75}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent z-10" />
                 </div>
@@ -331,7 +375,8 @@ export function HighlightsSection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-50 bg-[#FCFBFA]/98 backdrop-blur-2xl overflow-y-auto flex flex-col items-center py-10 px-6 md:px-14"
+            // Fix 2: Solid background — no backdrop-blur-2xl thrashing the GPU on every scroll
+            className="fixed inset-0 z-50 bg-[#FCFBFA] overflow-y-auto flex flex-col items-center py-10 px-6 md:px-14"
           >
             {/* Modal Header */}
             <div className="w-full max-w-[1200px] flex justify-between items-center mb-10 border-b border-[#D98C9A]/15 pb-4">
@@ -370,7 +415,7 @@ export function HighlightsSection() {
                     <span>{image.tag}</span>
                   </div>
 
-                  {/* Image */}
+                  {/* Fix 3: lazy loading (default) + quality={75}, priority only on first 4 */}
                   <div className="relative w-full h-full overflow-hidden">
                     <Image
                       src={image.src}
@@ -378,6 +423,8 @@ export function HighlightsSection() {
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                       className="object-cover object-[center_20%] transition-transform duration-600 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.03]"
+                      quality={75}
+                      priority={idx < 4}
                     />
                   </div>
                 </div>
