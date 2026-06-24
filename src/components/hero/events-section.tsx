@@ -71,24 +71,26 @@ export function EventsSection() {
                   borderColor: "rgba(255, 255, 255, 0.9)",
                   boxShadow: "0 10px 30px rgba(80, 80, 120, 0.06)",
                 }}
-                className={`group flex items-center justify-center gap-2 rounded-full border transition-all duration-250 ease-out hover:translate-y-[-4px] hover:bg-white/85 hover:shadow-[0_12px_35px_rgba(217,140,154,0.06)] cursor-pointer text-center w-full max-w-[280px] md:max-w-none ${
+                className={`group flex flex-col items-center justify-center gap-1.5 rounded-full border transition-all duration-250 ease-out hover:translate-y-[-4px] hover:bg-white/85 hover:shadow-[0_12px_35px_rgba(217,140,154,0.06)] cursor-pointer text-center w-full max-w-[280px] md:max-w-none h-[96px] md:h-[108px] ${
                   isPrimary
-                    ? "px-5 py-4 md:px-[28px] md:py-[18px]"
-                    : "px-4 py-3.5 md:px-[22px] md:py-[14px] opacity-90 hover:opacity-100"
+                    ? "px-5 md:px-[28px]"
+                    : "px-4 md:px-[22px] opacity-90 hover:opacity-100"
                 }`}
               >
                 {/* Accent Symbol */}
-                <span className="text-[#D98C9A] text-[14px] select-none transition-transform duration-300 group-hover:scale-125">
+                <span className="text-[#D98C9A] text-[14px] select-none transition-transform duration-300 group-hover:scale-125 leading-none">
                   ✦
                 </span>
-                
-                {/* Category Text */}
+
+                {/* Category Text — max-width forces two-line wrap on every label */}
                 <span
-                  className="font-[family-name:var(--font-serif)] font-semibold text-[#3B343A] tracking-wide"
+                  className="font-[family-name:var(--font-serif)] font-semibold text-[#3B343A] tracking-wide leading-snug text-center"
                   style={{
                     fontSize: isPrimary
                       ? "clamp(15px, 1.6vw, 21px)"
                       : "clamp(13px, 1.4vw, 18px)",
+                    maxWidth: "9ch",
+                    display: "block",
                   }}
                 >
                   {category.name}

@@ -170,10 +170,12 @@ const StaticDecorations = memo(function StaticDecorations() {
 });
 
 // ---------------------------------------------------------------------------
-// IntersectionObserver hook — no onScroll, no main-thread thrashing
+// Snap-aware scroll index hook
+// Updates ONLY after the snap animation finishes (scrollend), never during drag.
+// Falls back to a debounced scroll event on browsers without scrollend support.
 // ---------------------------------------------------------------------------
 
-function useMobileScrollIndex(
+function useSnapScrollIndex(
   scrollRef: React.RefObject<HTMLDivElement | null>,
   count: number
 ) {
@@ -181,33 +183,132 @@ function useMobileScrollIndex(
 
   useEffect(() => {
     const container = scrollRef.current;
-    if (!container) return;
+    if (!container || count === 0) return;
 
-    const cards = Array.from(container.children) as HTMLElement[];
-    if (cards.length === 0) return;
+    // Reads the snapped index synchronously from the DOM — no Observer needed.
+    function readSnappedIndex(): number {
+      const el = container!;
+      const containerCenter = el.scrollLeft + el.clientWidth / 2;
+      const cards = Array.from(el.children) as HTMLElement[];
+      let closest = 0;
+      let minDist = Infinity;
+      cards.forEach((card, i) => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const dist = Math.abs(containerCenter - cardCenter);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      return closest;
+    }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        let best = { ratio: -1, index: 0 };
-        entries.forEach((entry) => {
-          const idx = cards.indexOf(entry.target as HTMLElement);
-          if (idx !== -1 && entry.intersectionRatio > best.ratio) {
-            best = { ratio: entry.intersectionRatio, index: idx };
-          }
-        });
-        if (best.ratio > 0) {
-          setActiveIndex(best.index);
-        }
-      },
-      { root: container, threshold: [0.5, 0.75, 1.0] }
-    );
+    // Prefer scrollend (fires exactly once after snapping stops)
+    const supportsScrollEnd = "onscrollend" in window;
 
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
+    let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+    function onScrollEnd() {
+      setActiveIndex(readSnappedIndex());
+    }
+
+    function onScroll() {
+      // Debounce fallback — commit only after scrolling pauses for 120 ms
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        setActiveIndex(readSnappedIndex());
+      }, 120);
+    }
+
+    if (supportsScrollEnd) {
+      container.addEventListener("scrollend", onScrollEnd, { passive: true });
+    } else {
+      container.addEventListener("scroll", onScroll, { passive: true });
+    }
+
+    return () => {
+      if (supportsScrollEnd) {
+        container.removeEventListener("scrollend", onScrollEnd);
+      } else {
+        container.removeEventListener("scroll", onScroll);
+        if (debounceTimer) clearTimeout(debounceTimer);
+      }
+    };
   }, [scrollRef, count]);
 
   return activeIndex;
 }
+
+// ---------------------------------------------------------------------------
+// CarouselIndicators — always-mounted dots, styled-only active state.
+// Memoized so it never re-renders during scroll events in MobileCarousel.
+// ---------------------------------------------------------------------------
+
+const CarouselIndicators = memo(function CarouselIndicators({
+  count,
+  activeIndex,
+}: {
+  count: number;
+  activeIndex: number;
+}) {
+  return (
+    <div
+      className="flex items-center gap-2.5 mt-5 select-none"
+      aria-hidden="true"
+    >
+      {Array.from({ length: count }).map((_, i) => {
+        const isActive = i === activeIndex;
+        return (
+          <span
+            key={i}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 20,
+              height: 20,
+              // Transition only the properties we actually change — never 'all'
+              transition: "opacity 250ms ease, transform 250ms ease",
+              opacity: isActive ? 1 : 0.35,
+              transform: isActive ? "scale(1.15)" : "scale(1)",
+              color: "#D98C9A",
+            }}
+          >
+            {/* Heart is always mounted; opacity/scale drive the active state */}
+            <svg
+              viewBox="0 0 24 24"
+              width={isActive ? 17 : 0}
+              height={isActive ? 17 : 0}
+              style={{
+                position: "absolute",
+                fill: "#D98C9A",
+                transition: "opacity 250ms ease, width 250ms ease, height 250ms ease",
+                opacity: isActive ? 1 : 0,
+                pointerEvents: "none",
+              }}
+            >
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+            </svg>
+            {/* Dot ring always mounted; fades out when active */}
+            <svg
+              viewBox="0 0 24 24"
+              width={14}
+              height={14}
+              style={{
+                position: "absolute",
+                fill: "none",
+                stroke: "#D98C9A",
+                strokeWidth: 2,
+                transition: "opacity 250ms ease",
+                opacity: isActive ? 0 : 1,
+                pointerEvents: "none",
+              }}
+            >
+              <circle cx="12" cy="12" r="9" />
+            </svg>
+          </span>
+        );
+      })}
+    </div>
+  );
+});
 
 // ---------------------------------------------------------------------------
 // MobileCarousel — isolated component so its state never re-renders the parent
@@ -215,17 +316,20 @@ function useMobileScrollIndex(
 
 function MobileCarousel({ images }: { images: HighlightItem[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const activeIndex = useMobileScrollIndex(scrollRef, images.length);
+  const activeIndex = useSnapScrollIndex(scrollRef, images.length);
 
   return (
     <div className="md:hidden flex flex-col items-center w-full">
-      {/* Scroll container — no onScroll handler, IntersectionObserver does the work */}
+      {/* Scroll container — scrollend / debounced-scroll drives activeIndex */}
       <div
         ref={scrollRef}
-        className="flex overflow-x-auto gap-5 pb-6 pt-2 w-screen scrollbar-none snap-x snap-mandatory overflow-y-visible transform-gpu"
+        className="flex overflow-x-auto gap-5 pb-6 pt-2 w-screen scrollbar-none snap-x snap-mandatory transform-gpu"
         style={{
           paddingLeft: "calc(50vw - 140px)",
           paddingRight: "calc(50vw - 140px)",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          overflowY: "hidden",
         }}
       >
         {images.map((image, i) => (
@@ -233,7 +337,7 @@ function MobileCarousel({ images }: { images: HighlightItem[] }) {
             key={`mobile-${image.src}`}
             className="snap-center flex-shrink-0 w-[280px] aspect-[4/5] relative rounded-[24px] overflow-hidden border border-white/50 shadow-lg cursor-pointer"
           >
-            {/* Event tag — solid bg, no backdrop-blur */}
+            {/* Event tag */}
             <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium bg-white/95 border border-white/60 shadow-sm text-[#2D2730] pointer-events-none select-none">
               <span className="flex items-center justify-center">
                 <HeartIcon filled={true} />
@@ -258,18 +362,8 @@ function MobileCarousel({ images }: { images: HighlightItem[] }) {
         ))}
       </div>
 
-      {/* Indicator dots */}
-      <div className="flex items-center gap-2.5 mt-5 text-[#D98C9A] select-none text-[15px]">
-        {images.map((_, i) => (
-          <span key={`indicator-${i}`} className="transition-all duration-300 transform">
-            {i === activeIndex ? (
-              <span className="text-[17px] font-bold inline-block scale-110 drop-shadow-sm">♥</span>
-            ) : (
-              <span className="opacity-40 inline-block">○</span>
-            )}
-          </span>
-        ))}
-      </div>
+      {/* Indicator — memoized, receives only the committed snap index */}
+      <CarouselIndicators count={images.length} activeIndex={activeIndex} />
     </div>
   );
 }
