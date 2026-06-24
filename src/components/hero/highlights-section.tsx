@@ -4,7 +4,20 @@ import { useRef, useState, useEffect, memo } from "react";
 import Image from "next/image";
 import { motion, useInView, AnimatePresence } from "motion/react";
 
-const desktopHighlights = [
+// ---------------------------------------------------------------------------
+// Data
+// ---------------------------------------------------------------------------
+
+type HighlightItem = {
+  src: string;
+  alt: string;
+  tag: string;
+  rowSpan: string;
+  colSpan: string;
+  objectPos: string;
+};
+
+const desktopHighlights: HighlightItem[] = [
   {
     src: "/events/Award function.jpeg",
     alt: "Award Function",
@@ -68,7 +81,11 @@ const allImages = [
   { src: "/events/Diwali Mela.jpeg", alt: "Diwali Mela", tag: "Diwali Mela" },
   { src: "/events/Sports tournament.jpeg", alt: "Sports Tournament", tag: "Sports Tournament" },
   { src: "/events/Holy communion.jpeg", alt: "Holy Communion", tag: "Holy Communion" },
-  { src: "/events/Miss India newzealand 2023 finalist.jpeg", alt: "Miss India New Zealand 2023 Finalist", tag: "Miss India New Zealand 2023 Finalist" },
+  {
+    src: "/events/Miss India newzealand 2023 finalist.jpeg",
+    alt: "Miss India New Zealand 2023 Finalist",
+    tag: "Miss India New Zealand 2023 Finalist",
+  },
   { src: "/events/Birthday.jpeg", alt: "Birthday", tag: "Birthday" },
 ];
 
@@ -81,6 +98,10 @@ const cuteAccentsData = [
   { type: "heart", bottom: "10%", left: "20%", size: 12 },
 ];
 
+// ---------------------------------------------------------------------------
+// Sub-components
+// ---------------------------------------------------------------------------
+
 const HeartIcon = ({ filled = true }: { filled?: boolean }) => (
   <svg
     viewBox="0 0 24 24"
@@ -91,7 +112,7 @@ const HeartIcon = ({ filled = true }: { filled?: boolean }) => (
   </svg>
 );
 
-// Fix 4: Memoized static decorations — never re-renders due to parent state changes
+// Memoized static decorations — never re-renders due to parent state changes
 const StaticDecorations = memo(function StaticDecorations() {
   return (
     <>
@@ -125,37 +146,22 @@ const StaticDecorations = memo(function StaticDecorations() {
           }}
         >
           {accent.type === "sparkle" && (
-            <svg
-              viewBox="0 0 24 24"
-              className="fill-current"
-              style={{ width: accent.size, height: accent.size }}
-            >
+            <svg viewBox="0 0 24 24" className="fill-current" style={{ width: accent.size, height: accent.size }}>
               <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z" />
             </svg>
           )}
           {accent.type === "heart" && (
-            <svg
-              viewBox="0 0 24 24"
-              className="fill-current"
-              style={{ width: accent.size, height: accent.size }}
-            >
+            <svg viewBox="0 0 24 24" className="fill-current" style={{ width: accent.size, height: accent.size }}>
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
             </svg>
           )}
           {accent.type === "star" && (
-            <svg
-              viewBox="0 0 24 24"
-              className="fill-current"
-              style={{ width: accent.size, height: accent.size }}
-            >
+            <svg viewBox="0 0 24 24" className="fill-current" style={{ width: accent.size, height: accent.size }}>
               <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
             </svg>
           )}
           {accent.type === "dot" && (
-            <span
-              className="block rounded-full bg-[#D98C9A]"
-              style={{ width: accent.size, height: accent.size }}
-            />
+            <span className="block rounded-full bg-[#D98C9A]" style={{ width: accent.size, height: accent.size }} />
           )}
         </span>
       ))}
@@ -163,7 +169,10 @@ const StaticDecorations = memo(function StaticDecorations() {
   );
 });
 
-// Fix 1 (Option B): IntersectionObserver-based mobile scroll tracker — no onScroll needed
+// ---------------------------------------------------------------------------
+// IntersectionObserver hook — no onScroll, no main-thread thrashing
+// ---------------------------------------------------------------------------
+
 function useMobileScrollIndex(
   scrollRef: React.RefObject<HTMLDivElement | null>,
   count: number
@@ -179,7 +188,6 @@ function useMobileScrollIndex(
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find the entry with the highest intersection ratio
         let best = { ratio: -1, index: 0 };
         entries.forEach((entry) => {
           const idx = cards.indexOf(entry.target as HTMLElement);
@@ -191,10 +199,7 @@ function useMobileScrollIndex(
           setActiveIndex(best.index);
         }
       },
-      {
-        root: container,
-        threshold: [0.5, 0.75, 1.0],
-      }
+      { root: container, threshold: [0.5, 0.75, 1.0] }
     );
 
     cards.forEach((card) => observer.observe(card));
@@ -204,22 +209,83 @@ function useMobileScrollIndex(
   return activeIndex;
 }
 
+// ---------------------------------------------------------------------------
+// MobileCarousel — isolated component so its state never re-renders the parent
+// ---------------------------------------------------------------------------
+
+function MobileCarousel({ images }: { images: HighlightItem[] }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const activeIndex = useMobileScrollIndex(scrollRef, images.length);
+
+  return (
+    <div className="md:hidden flex flex-col items-center w-full">
+      {/* Scroll container — no onScroll handler, IntersectionObserver does the work */}
+      <div
+        ref={scrollRef}
+        className="flex overflow-x-auto gap-5 pb-6 pt-2 w-screen scrollbar-none snap-x snap-mandatory overflow-y-visible transform-gpu"
+        style={{
+          paddingLeft: "calc(50vw - 140px)",
+          paddingRight: "calc(50vw - 140px)",
+        }}
+      >
+        {images.map((image, i) => (
+          <div
+            key={`mobile-${image.src}`}
+            className="snap-center flex-shrink-0 w-[280px] aspect-[4/5] relative rounded-[24px] overflow-hidden border border-white/50 shadow-lg cursor-pointer"
+          >
+            {/* Event tag — solid bg, no backdrop-blur */}
+            <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium bg-white/95 border border-white/60 shadow-sm text-[#2D2730] pointer-events-none select-none">
+              <span className="flex items-center justify-center">
+                <HeartIcon filled={true} />
+              </span>
+              <span>{image.tag}</span>
+            </div>
+
+            {/* Image wrapper — GPU-accelerated layer */}
+            <div className="relative w-full h-full transform-gpu will-change-transform">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="280px"
+                className={`object-cover ${image.objectPos}`}
+                priority={i < 2}
+                quality={75}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent z-10" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Indicator dots */}
+      <div className="flex items-center gap-2.5 mt-5 text-[#D98C9A] select-none text-[15px]">
+        {images.map((_, i) => (
+          <span key={`indicator-${i}`} className="transition-all duration-300 transform">
+            {i === activeIndex ? (
+              <span className="text-[17px] font-bold inline-block scale-110 drop-shadow-sm">♥</span>
+            ) : (
+              <span className="opacity-40 inline-block">○</span>
+            )}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Main export
+// ---------------------------------------------------------------------------
+
 export function HighlightsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Fix 1: IntersectionObserver replaces the onScroll handler entirely
-  const activeIndex = useMobileScrollIndex(scrollRef, desktopHighlights.length);
-
   // Lock body scroll when modal is open
   useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isModalOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -236,11 +302,11 @@ export function HighlightsSection() {
         background: "linear-gradient(135deg, #FDF8F9 0%, #F7F6FB 45%, #F4F8FD 100%)",
       }}
     >
-      {/* Fix 4: Memoized — won't re-render when activeIndex or isModalOpen changes */}
+      {/* Memoized decorations — immune to isModalOpen re-renders */}
       <StaticDecorations />
 
       <div className="relative mx-auto max-w-[1240px] w-full z-10">
-        {/* Section Header Block */}
+        {/* Section Header */}
         <div className="text-center mb-6 md:mb-8 flex flex-col items-center">
           <span className="block text-center font-sans text-[12px] font-semibold tracking-[0.35em] uppercase text-[#D98C9A] mb-3">
             ✦ EVENT HIGHLIGHTS ✦
@@ -256,33 +322,27 @@ export function HighlightsSection() {
           </p>
         </div>
 
-        {/* DESKTOP VIEW: Balanced Bento Grid (6 cards, equal heights) */}
+        {/* DESKTOP VIEW: Bento Grid */}
         <div className="hidden md:grid grid-cols-4 gap-4 w-full items-start justify-items-stretch">
           {desktopHighlights.map((image, i) => (
             <motion.div
               key={image.src}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{
-                duration: 0.6,
-                delay: i * 0.05,
-                ease: "easeOut",
-              }}
-              style={{
-                boxShadow: "0 10px 30px rgba(80, 80, 120, 0.04)",
-              }}
+              transition={{ duration: 0.6, delay: i * 0.05, ease: "easeOut" }}
+              style={{ boxShadow: "0 10px 30px rgba(80, 80, 120, 0.04)" }}
               className={`${image.colSpan} ${image.rowSpan} group relative rounded-[24px] overflow-hidden border border-white/40 cursor-pointer`}
             >
-              {/* Event Tag */}
-              <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium bg-white/70 backdrop-blur-md border border-white/50 shadow-sm text-[#2D2730] pointer-events-none select-none">
+              {/* Event tag — solid bg, no backdrop-blur */}
+              <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium bg-white/95 border border-white/60 shadow-sm text-[#2D2730] pointer-events-none select-none">
                 <span className="flex items-center justify-center">
                   <HeartIcon filled={true} />
                 </span>
                 <span>{image.tag}</span>
               </div>
 
-              {/* Card Image — Fix 3: priority on first 3 desktop cards */}
-              <div className="relative w-full h-full overflow-hidden">
+              {/* Image wrapper — GPU-composited layer for smooth hover scale */}
+              <div className="relative w-full h-full overflow-hidden transform-gpu will-change-transform">
                 <Image
                   src={image.src}
                   alt={image.alt}
@@ -292,77 +352,26 @@ export function HighlightsSection() {
                   priority={i < 3}
                   quality={75}
                 />
-                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] z-10" />
+                {/* Lightweight hover overlay — solid color, no blur */}
+                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* MOBILE VIEW (Horizontal Swipe Gallery) */}
-        <div className="md:hidden flex flex-col items-center w-full">
-          {/* Fix 1: No onScroll handler — IntersectionObserver tracks active card */}
-          <div
-            ref={scrollRef}
-            className="flex overflow-x-auto gap-5 px-6 pb-6 pt-2 w-screen scrollbar-none snap-x snap-mandatory overflow-y-visible transform-gpu"
-            style={{
-              paddingLeft: "calc(50vw - 140px)",
-              paddingRight: "calc(50vw - 140px)",
-            }}
-          >
-            {desktopHighlights.map((image, i) => (
-              <div
-                key={`mobile-${image.src}`}
-                className="snap-center flex-shrink-0 w-[280px] aspect-[4/5] relative rounded-[24px] overflow-hidden border border-white/50 shadow-lg cursor-pointer"
-              >
-                <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-medium bg-white/70 backdrop-blur-md border border-white/50 shadow-sm text-[#2D2730] pointer-events-none select-none">
-                  <span className="flex items-center justify-center">
-                    <HeartIcon filled={true} />
-                  </span>
-                  <span>{image.tag}</span>
-                </div>
+        {/* MOBILE VIEW — isolated component, state changes never reach the parent */}
+        <MobileCarousel images={desktopHighlights} />
 
-                <div className="relative w-full h-full">
-                  {/* Fix 3: priority on first 2 mobile cards, lazy rest */}
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    sizes="280px"
-                    className={`object-cover ${image.objectPos}`}
-                    priority={i < 2}
-                    quality={75}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent z-10" />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2.5 mt-5 text-[#D98C9A] select-none text-[15px]">
-            {desktopHighlights.map((_, i) => (
-              <span key={`indicator-${i}`} className="transition-all duration-300 transform">
-                {i === activeIndex ? (
-                  <span className="text-[17px] font-bold inline-block scale-110 drop-shadow-sm">♥</span>
-                ) : (
-                  <span className="opacity-40 inline-block">○</span>
-                )}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* View Gallery CTA Button (Opens Modal) */}
+        {/* View Gallery CTA */}
         <div className="mt-8 flex justify-center">
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => setIsModalOpen(true)}
-            className="group flex items-center gap-2 rounded-full px-8 py-3.5 bg-white/60 backdrop-blur-md border border-[#D98C9A]/30 text-[#2D2730] font-sans font-medium text-[14px] md:text-[15px] tracking-wide shadow-[0_8px_25px_rgba(217,140,154,0.08)] cursor-pointer hover:bg-white/80 hover:border-[#D98C9A] hover:shadow-[0_12px_30px_rgba(217,140,154,0.18)] transition-all duration-250 ease-out"
+            className="group flex items-center gap-2 rounded-full px-8 py-3.5 bg-white/60 border border-[#D98C9A]/30 text-[#2D2730] font-sans font-medium text-[14px] md:text-[15px] tracking-wide shadow-[0_8px_25px_rgba(217,140,154,0.08)] cursor-pointer hover:bg-white/80 hover:border-[#D98C9A] hover:shadow-[0_12px_30px_rgba(217,140,154,0.18)] transition-all duration-250 ease-out"
           >
             <span>View Full Gallery</span>
-            <span className="transform transition-transform duration-250 ease-out group-hover:translate-x-1">
-              →
-            </span>
+            <span className="transform transition-transform duration-250 ease-out group-hover:translate-x-1">→</span>
           </motion.button>
         </div>
       </div>
@@ -375,7 +384,6 @@ export function HighlightsSection() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            // Fix 2: Solid background — no backdrop-blur-2xl thrashing the GPU on every scroll
             className="fixed inset-0 z-50 bg-[#FCFBFA] overflow-y-auto flex flex-col items-center py-10 px-6 md:px-14"
           >
             {/* Modal Header */}
@@ -409,20 +417,20 @@ export function HighlightsSection() {
                   key={idx}
                   className="group relative rounded-[24px] overflow-hidden border border-white/50 shadow-[0_8px_25px_rgba(0,0,0,0.03)] h-[280px] cursor-default"
                 >
-                  {/* Event Tag */}
-                  <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium bg-white/80 backdrop-blur-md border border-white/60 text-[#2D2730] shadow-sm pointer-events-none select-none">
+                  {/* Event tag — solid bg, no backdrop-blur */}
+                  <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-medium bg-white/95 border border-white/60 text-[#2D2730] shadow-sm pointer-events-none select-none">
                     <span>♥</span>
                     <span>{image.tag}</span>
                   </div>
 
-                  {/* Fix 3: lazy loading (default) + quality={75}, priority only on first 4 */}
-                  <div className="relative w-full h-full overflow-hidden">
+                  {/* Image wrapper — GPU-composited for smooth hover */}
+                  <div className="relative w-full h-full overflow-hidden transform-gpu will-change-transform">
                     <Image
                       src={image.src}
                       alt={image.alt}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      className="object-cover object-[center_20%] transition-transform duration-600 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.03]"
+                      className="object-cover object-[center_20%] transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.03]"
                       quality={75}
                       priority={idx < 4}
                     />
