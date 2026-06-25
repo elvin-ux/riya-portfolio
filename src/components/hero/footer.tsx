@@ -8,6 +8,7 @@ import {
   Facebook as FacebookIcon, 
   Mail as MailIcon 
 } from "lucide-react";
+import { EventBookingForm } from "./event-booking-form";
 
 const containerVariants = {
   hidden: { opacity: 1 },
@@ -99,6 +100,11 @@ export function Footer() {
         >
           Let&apos;s Create Something Memorable Together
         </motion.h2>
+
+        {/* Event Booking Form — inserted directly below the heading */}
+        <motion.div variants={childVariants} className="w-full">
+          <EventBookingForm />
+        </motion.div>
 
         {/* 4. Supporting copy */}
         <motion.p
