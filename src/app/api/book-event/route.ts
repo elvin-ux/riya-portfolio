@@ -362,7 +362,7 @@ export async function POST(request: NextRequest) {
   try {
     const { error } = await resend.emails.send({
       from: "Riya Francis Portfolio <onboarding@resend.dev>",
-      to: ["elvinmanuelcsjr6@gmail.com"],
+      to: ["Riyafrancis693@gmail.com"],
       replyTo: email,
       subject: `New Event Booking Request - ${fullName}`,
       html: buildEmailHtml({
@@ -391,7 +391,7 @@ export async function POST(request: NextRequest) {
       const { error: confirmError } = await resend.emails.send({
         from: "Riya Francis <onboarding@resend.dev>",
         to: [email],
-        replyTo: "elvinmanuelcsjr6@gmail.com",
+        replyTo: "Riyafrancis693@gmail.com",
         subject: "✨ Booking Request Received",
         html: buildConfirmationEmailHtml({
           fullName,
