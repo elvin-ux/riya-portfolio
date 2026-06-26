@@ -25,14 +25,14 @@ const allura = Allura({
   weight: "400",
 });
 
-const siteUrl = "https://riyafrancis.com";
+const siteUrl = "https://riya-portfolio-beige.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: "Riya Francis | Event Host, MC & Radio Jockey",
   description:
-    "Professional event host, MC, radio jockey, and UGC creator based in New Zealand. View Riya Francis' portfolio, experience, and book for your next event.",
+    "Professional event host, MC & radio jockey based in New Zealand. Book Riya Francis for your next event.",
 
   keywords: [
     "Riya Francis",
@@ -79,10 +79,10 @@ export const metadata: Metadata = {
     siteName: "Riya Francis",
     title: "Riya Francis | Event Host, MC & Radio Jockey",
     description:
-      "Professional event host, MC, radio jockey, and UGC creator based in New Zealand. View Riya Francis' portfolio, experience, and book for your next event.",
+      "Professional event host, MC & radio jockey based in New Zealand. Book Riya Francis for your next event.",
     images: [
       {
-        url: "/og-image-v2.jpg",
+        url: `${siteUrl}/og-image-v2.png`,
         width: 1200,
         height: 630,
         alt: "Riya Francis – Event Host, MC & Radio Jockey based in New Zealand",
@@ -98,8 +98,8 @@ export const metadata: Metadata = {
     creator: "@riyafrancis",
     title: "Riya Francis | Event Host, MC & Radio Jockey",
     description:
-      "Professional event host, MC, radio jockey, and UGC creator based in New Zealand. View Riya Francis' portfolio, experience, and book for your next event.",
-    images: ["/og-image-v2.jpg"],
+      "Professional event host, MC & radio jockey based in New Zealand. Book Riya Francis for your next event.",
+    images: [`${siteUrl}/og-image-v2.png`],
   },
 };
 
