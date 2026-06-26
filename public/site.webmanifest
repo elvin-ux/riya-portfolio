@@ -1,0 +1,23 @@
+{
+  "name": "Riya Francis | Event Host, MC & Radio Jockey",
+  "short_name": "Riya Francis",
+  "description": "Professional event host, MC, radio jockey, and UGC creator based in New Zealand.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FCFBFA",
+  "theme_color": "#EDE8DF",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
