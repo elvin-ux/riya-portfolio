@@ -29,9 +29,9 @@ export function HeroCopy() {
       </h1>
 
       <p className="mt-12 max-w-[520px] font-[family-name:var(--font-serif)] text-[2.78rem] leading-[1.1] tracking-[-0.035em] text-[#1f1c1d] italic">
-        You plan the celebration.
+        &ldquo;You plan the celebration.
         <br />
-        I’ll take care of the stage.
+        I&rsquo;ll take care of the stage.&rdquo;
       </p>
 
       <p className="mt-12 pl-0.5 text-[0.74rem] font-semibold uppercase tracking-[0.45em] text-[#5f5558]">

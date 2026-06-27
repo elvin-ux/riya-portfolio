@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 
 export function HeroVisual() {
   return (
-    <div className="relative flex h-[94vh] w-full items-end justify-center">
+    <div className="relative flex h-full min-h-[100svh] w-full items-end justify-center md:h-[860px] md:min-h-0 lg:h-[94vh]">
       {/* SEAMLESS ATMOSPHERIC GRADIENTS (Behind Subject) */}
 
       {/* 1. Main Luminous Halo (Centered behind head and shoulders) */}
@@ -69,12 +69,12 @@ export function HeroVisual() {
           width={1257}
           height={2048}
           priority
-          sizes="56vw"
+          sizes="(max-width: 767px) 86vw, 56vw"
           style={{
             // CSS Drop shadow is GPU accelerated and much faster than SVG filters
             filter: "drop-shadow(0px 0px 20px rgba(244, 246, 251, 0.6)) drop-shadow(0px 0px 8px rgba(250, 243, 243, 0.8))",
           }}
-          className="relative z-20 h-[92vh] w-auto max-w-none object-contain drop-shadow-[0_20px_50px_rgba(126,105,111,0.03)] -translate-y-[100px] [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]"
+          className="relative z-20 h-[clamp(620px,86svh,780px)] w-auto max-w-none translate-x-[22%] -translate-y-[clamp(86px,13svh,118px)] object-contain drop-shadow-[0_20px_50px_rgba(126,105,111,0.03)] [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] md:h-[830px] md:translate-x-0 md:-translate-y-[64px] lg:h-[92vh] lg:-translate-y-[100px]"
         />
       </motion.div>
 
